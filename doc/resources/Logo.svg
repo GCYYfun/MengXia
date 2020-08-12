@@ -8,9 +8,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="149.71387mm"
-   height="149.91125mm"
-   viewBox="0 0 149.71387 149.91125"
+   width="90mm"
+   height="90mm"
+   viewBox="0 0 90 90"
    version="1.1"
    id="svg8"
    inkscape:version="1.0 (9f2f71dc58, 2020-08-02)"
@@ -34,8 +34,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.49497475"
-     inkscape:cx="450.05108"
-     inkscape:cy="375.97424"
+     inkscape:cx="335.87746"
+     inkscape:cy="353.06584"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -64,23 +64,24 @@
      transform="translate(-30,-70)">
     <path
        id="rect2797"
-       style="fill:#12e500;fill-opacity:1;stroke:none;stroke-width:0.177;stroke-miterlimit:4;stroke-dasharray:none"
-       d="m 104.85951,70 -46.746497,93.61289 h 5.138703 l 41.607274,-83.211456 41.60419,83.211456 h 5.13973 z M 43.248804,193.38007 30,219.91126 h 149.71386 l -13.24777,-26.53119 h -5.11958 l 11.01018,22.02139 H 37.356657 l 11.011215,-22.02139 z"
+       style="fill:#12e500;fill-opacity:1;stroke:none;stroke-width:0.106332;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 75.001551,70 -28.101505,56.20098 h 3.089115 L 75.001238,76.244555 100.01147,126.20098 h 3.08973 z M 37.964476,144.07186 30,160 h 90 l -7.96385,-15.92814 h -3.07762 l 6.61873,13.22066 H 34.422431 l 6.619355,-13.22066 z"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:14.1073px;line-height:1.25;font-family:sans-serif;fill:#12e500;fill-opacity:1;stroke:none;stroke-width:0.352684"
-       x="72.169678"
-       y="191.2534"
+       style="font-style:normal;font-weight:normal;font-size:8.475px;line-height:1.25;font-family:sans-serif;fill:#12e500;fill-opacity:1;stroke:none;stroke-width:0.211875"
+       x="55.313713"
+       y="142.88921"
        id="text2829"
        inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96"><tspan
+       inkscape:export-ydpi="96"
+       transform="scale(1.000659,0.99934143)"><tspan
          sodipodi:role="line"
          id="tspan2827"
-         x="72.169678"
-         y="191.2534"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:33.8577px;font-family:'AR PL UKai CN';-inkscape-font-specification:'AR PL UKai CN, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#12e500;fill-opacity:1;stroke-width:0.352684">孟夏</tspan></text>
+         x="55.313713"
+         y="142.88921"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20.3401px;font-family:'AR PL UKai CN';-inkscape-font-specification:'AR PL UKai CN, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#12e500;fill-opacity:1;stroke-width:0.211875">孟夏</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
