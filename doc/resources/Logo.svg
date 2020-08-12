@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="149.71387mm"
+   height="149.91125mm"
+   viewBox="0 0 149.71387 149.91125"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0 (9f2f71dc58, 2020-08-02)"
+   sodipodi:docname="Logo.svg">
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient849"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#002248;stop-opacity:1;"
+         offset="0"
+         id="stop847" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="450.05108"
+     inkscape:cy="375.97424"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1262"
+     inkscape:window-height="1016"
+     inkscape:window-x="658"
+     inkscape:window-y="27"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="图层 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-30,-70)">
+    <path
+       id="rect2797"
+       style="fill:#12e500;fill-opacity:1;stroke:none;stroke-width:0.177;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 104.85951,70 -46.746497,93.61289 h 5.138703 l 41.607274,-83.211456 41.60419,83.211456 h 5.13973 z M 43.248804,193.38007 30,219.91126 h 149.71386 l -13.24777,-26.53119 h -5.11958 l 11.01018,22.02139 H 37.356657 l 11.011215,-22.02139 z"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:14.1073px;line-height:1.25;font-family:sans-serif;fill:#12e500;fill-opacity:1;stroke:none;stroke-width:0.352684"
+       x="72.169678"
+       y="191.2534"
+       id="text2829"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan2827"
+         x="72.169678"
+         y="191.2534"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:33.8577px;font-family:'AR PL UKai CN';-inkscape-font-specification:'AR PL UKai CN, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#12e500;fill-opacity:1;stroke-width:0.352684">孟夏</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="90.179749"
+       y="84.372681"
+       id="text2839"><tspan
+         sodipodi:role="line"
+         id="tspan2837"
+         x="90.179749"
+         y="84.372681"
+         style="stroke-width:0.264583" /></text>
+  </g>
+</svg>
