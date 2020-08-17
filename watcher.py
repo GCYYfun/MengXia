@@ -97,14 +97,21 @@ def clone_fn(repo):
 
 
 def update_fn(repo):
+    if not check_for_update_available(repo):
+        return
     print("Update")
     print("切换 工作 目录 ----->")
     print("切换前:" + str(os.system("pwd")))
     os.chdir("./warehouse/" + repo.name + "_realm/" + repo.user)
     print("切换后:" + str(os.system("pwd")))
+    # 请求 仓库 分支 信息
     branches = request_repo_branches(repo)
-    compare_branch_info(repo, branches)
-
+    # 对比 与 本地 的 情况 返回 变更的 分支
+    need_branches = compare_branch_info(repo, branches)
+    if len(need_branches) != 0:
+        update_branch(repo, need_branches)
+        mark_to_test(repo, need_branches)
+        update_branch_info(repo, branches)
     os.chdir(PWD)
     # try:
     #     header = {'Accept': 'application/vnd.github.v3+json'}
@@ -125,8 +132,6 @@ def update_fn(repo):
     # 3. 依据 新 branch 信息 和 本地 branch 信息 做对比
     # 4. 对 变化的 branch 进入 相对应的 branch 进行 更新
     # 5. 标记 此 branch 需要 测试
-
-    pass
 
 
 def register_watch(repo, clone_fn, update_fn):
@@ -197,7 +202,8 @@ def request_repo_branches(repo):
     for branche in branches:
         prepare_branch_dir(branche["name"])
     print("准备 完毕")
-    return branches
+    branches_list = convert_string_list(branches)
+    return branches_list
 
 
 def chech_branch_json_validity(json_branches):
@@ -214,19 +220,109 @@ def chech_branch_json_validity(json_branches):
 
 
 def compare_branch_info(repo, curr_branches):
+    res = []
     print(curr_branches)
+    if len(curr_branches) == 0:
+        return res
     curr = set()
     for b in curr_branches:
-        curr.add(str(b))
-        
+        curr.add(str(b).replace("'", "\""))
+    print("curr")
+    print(curr)
+
     last = redisManager.read_branch_info(repo)
     print("last")
     print(last)
-    
-    diff = curr - last
-    print("diff")
-    print(diff)
+
+    if len(last) == 0:
+        redisManager.save_branch_info(repo, curr_branches)
+
+    change = curr - last
+    print("change")
+    print(change)
+
+    if len(change) != 0:
+        print("有变化 : ", change)
+        for o in change:
+            # branch = o.split(":")[1].split(",")[0].replace("\"", "").strip()
+            branch = o.split(":")[0].strip()
+            print("branch : ", branch)
+            if branch == "gh-pages":
+                print("pages 无需 测试")
+                continue
+            res.append(branch)
+    else:
+        print("无需更新")
+    print(res)
+    return res
+
+
+def update_branch(repo, modified_branches):
+
+    print("切换 工作 目录 ----->")
+    print("切换前:" + str(os.system("pwd")))
+    os.chdir("./" + repo.name)
+    print("切换后:" + str(os.system("pwd")))
+
+    branch_res = os.popen("git branch").readlines()
+
+    for branch in modified_branches:
+        for br in branch_res:
+            br = br.strip()
+            print("匹配 ", br)
+            if br.startswith("*") and branch == br.replace("*", "").strip():
+                print("匹配 成功 且 当前分支 就是", branch)
+                break
+            if br == branch:
+                print("匹配 成功 ")
+                print("checkout :", branch)
+                os.system("git checkout " + branch)
+                break
+            print("匹配  失败")
+        else:
+            print("创建 分支 并 切换")
+            os.system("git checkout -b " + branch)
+
+        try:
+            print("pulling....")
+            res1 = os.popen("git fetch origin " + branch).readline()
+            print(res1)
+            res2 = os.popen("git reset --hard FETCH_HEAD").readline()
+            print(res2)
+        except:
+            print("pull 不符合预期")
+            os.chdir(PWD)
+            return
+
     pass
+
+
+def mark_to_test(repo, modified_branches):
+    print("标记 需要 测试的 仓库 分支")
+    redisManager.mark_to_test(repo, modified_branches)
+    pass
+
+
+def update_branch_info(repo, curr_branches):
+    print("更新 仓库 info 信息")
+    redisManager.update_branch_info(repo, curr_branches)
+    pass
+
+
+def check_for_update_available(repo):
+    if redisManager.test_is_running(repo):
+        print("测试 运行 中")
+        print("稍后更新")
+        return False
+    return True
+
+
+def convert_string_list(ls):
+    s = []
+    for l in ls:
+        item = "{0}:{1}".format(l['name'], l['commit']['sha'])
+        s.append(item)
+    return s
 
 
 if __name__ == '__main__':

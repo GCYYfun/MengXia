@@ -50,9 +50,42 @@ class RedisManager:
     def save_branch_info(self, repo, branches):
         key = repo.user + ":" + repo.name
         for branch in branches:
-            self.redis.sadd(key, json.dumps(branch))
+            self.redis.sadd(key, branch)
+
+    def update_branch_info(self, repo, branches):
+        key = repo.user + ":" + repo.name
+        self.redis.delete(key)
+        for branch in branches:
+            self.redis.sadd(key, branch)
 
     def read_branch_info(self, repo):
         key = repo.user + ":" + repo.name
-        branches = self.redis.smembers(key)
-        return branches
+        branches = set()
+        if self.redis.exists(key):
+            branches = self.redis.smembers(key)
+            if len(branches) != 0:
+                # 多余的工作 为了 适配 字符串
+                for b in branches:
+                    temp = bytes.decode(b)
+                    branches.remove(b)
+                    branches.add(temp)
+                return branches
+            else:
+                return branches
+        else:
+            return branches
+
+    def mark_to_test(self, repo, branches):
+        key = repo.user + ":" + repo.name + ":wait_to_test"
+        for branch in branches:
+            self.redis.sadd(key, branch)
+
+    def test_is_running(self, repo):
+        key = "running"
+        repos = self.redis.lrange(key, 0, -1)
+        if len(repos) != 0:
+            name = repo.user + ":" + repo.name
+            if name in repos:
+                return True
+            return False
+        return False
