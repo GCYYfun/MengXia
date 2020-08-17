@@ -2,6 +2,8 @@
 
 ![Logo](doc/resources/Logo.svg)
 
+（这已经是二代了 、一代目前正在 运行、持续迁移中）
+
 ## 简介
 
 名称 ： 孟夏
@@ -24,26 +26,31 @@
 
 ![MengXia](doc/resources/MengXia.svg)
 
+
 ## 前提 准备
 
-redis
+默认OS Ubuntu 20.04
 
-python3 
+需要 redis
+```
+sudo apt-get install redis-server
+```
+python3 lib
 
 ```
-requests
-schedule
-yaml
-redis
+pip3 install requests
+pip3 install schedule
+pip3 install PyYAML
+pip3 install redis
 ```
 
-## 获取 孟夏
+## 获取
 
 ```
-git clone https://github.com/GCYYfun/MengXia.git
+git clone https://github.com/GCYYfun/MengXia
 ```
 
-## Get started
+## 开始
 
 
 ```
@@ -52,3 +59,29 @@ cd MengXia
 python3 watcher.py (temp)
 
 ```
+
+## 说明
+
+* 我们把项目的根目录简称 根目录
+
+1. 在根目录 下 config 文件 配置 了 仓库需要观测 仓库的列表 repo_list.yaml 、在其中添加 仓库 地址
+1. 已经clone的仓库 放在 already_clone.yaml 文件里、 自动添加、
+1. 根目录 的 warehouse 是 各种仓库聚集地、
+
+
+## 目前进度
+
+watcher 模块 已完成
+
+预计 还有 runner 模块、 analysis 模块、 statistics 模块 、 feedback 模块 
+
+（暂定）
+
+
+| moudle     | status |
+|------------|--------|
+| watcher    | ok     |
+| runner     |        |
+| analysis   |        |
+| statistics |        |
+| feedback   |        |

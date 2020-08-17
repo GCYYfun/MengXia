@@ -48,6 +48,7 @@ repoManager = rm.RepoManager()
 
 PWD = sys.path[0]
 
+
 def clone_fn(repo):
 
     # 1.  设置 工作 目录
@@ -134,7 +135,6 @@ def update_fn(repo):
     # 3. 依据 新 branch 信息 和 本地 branch 信息 做对比
     # 4. 对 变化的 branch 进入 相对应的 branch 进行 更新
     # 5. 标记 此 branch 需要 测试
-
 
 
 def register_watch(repo, clone_fn, update_fn):
@@ -238,7 +238,7 @@ def compare_branch_info(repo, curr_branches):
     print(last)
 
     if len(last) == 0:
-        redisManager.save_branch_info(repo,curr_branches)
+        redisManager.save_branch_info(repo, curr_branches)
 
     change = curr - last
     print("change")
