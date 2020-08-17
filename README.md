@@ -23,3 +23,32 @@
 ## 项目结构
 
 ![MengXia](doc/resources/MengXia.svg)
+
+## 前提 准备
+
+redis
+
+python3 
+
+```
+requests
+schedule
+yaml
+redis
+```
+
+## 获取 孟夏
+
+```
+git clone https://github.com/GCYYfun/MengXia.git
+```
+
+## Get started
+
+
+```
+cd MengXia
+
+python3 watcher.py (temp)
+
+```
