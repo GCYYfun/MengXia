@@ -42,8 +42,7 @@ def main():
 def run_core_test(repo, branch):
     user = repo.split(":")[0]
     name = repo.split(":")[1]
-    switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name +
-               "/zCore")
+    switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name)
     os.system("git checkout " + branch)
 
     print(user, " - ", name, "coretest开始运行")
@@ -52,20 +51,25 @@ def run_core_test(repo, branch):
     # os.chdir("./warehouse/" + repo.name + "_realm/" + repo.user + "/" +
     #          repo.name + "/zCore")
     # ## build
-    # os.system("make build-parallel-test mode=release")
+    switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name +
+               "/zCore")
+    os.system("make build-parallel-test mode=release")
     # os.chdir(PWD)
     # ## 指定当前工作目录
-    # os.chdir("./warehouse/" + repo.name + "_realm/" + repo.user)
+    switch_dir("./warehouse/" + name + "_realm/" + user)
     # ## 执行测试
     # os.system("python3 ../parallel-test.py " + branch)
     # os.chdir(PWD)
-    # os.chdir("./warehouse/" + repo.name + "_realm/" + repo.user + "/" +
-    #          repo.name + "/zCore")
-    # os.system("make clean")
-    # print(repo.user, " - ", repo.name, "coretest运行结束")
-    # os.chdir(PWD)
-    # pass
+    switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name +
+               "/zCore")
+    os.system("make clean")
+    print(repo.user, " - ", repo.name, "coretest运行结束")
+    os.chdir(PWD)
 
+    pass
+
+
+def run_libc_test(repo, branch):
     pass
 
 
