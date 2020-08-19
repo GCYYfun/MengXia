@@ -52,10 +52,15 @@ PWD = sys.path[0]
 def clone_fn(repo):
 
     # 1.  设置 工作 目录
-    print("切换 工作 目录 ----->")
-    print("切换前:" + str(os.system("pwd")))
-    os.chdir("./warehouse/" + repo.name + "_realm/" + repo.user)
-    print("切换后:" + str(os.system("pwd")))
+    print("======================================")
+    print("repo clone ", repo.user, " - ", repo.name)
+    print("======================================")
+    # print("切换 工作 目录 ----->")
+    # os.chdir(PWD)
+    # print("切换前:" + str(os.system("pwd")))
+    # os.chdir("./warehouse/" + repo.name + "_realm/" + repo.user)
+    # print("切换后:" + str(os.system("pwd")))
+    switch_dir("./warehouse/" + repo.name + "_realm/" + repo.user)
     # 2.  clone 仓库
     try:
         print("开始 clone")
@@ -102,11 +107,10 @@ def clone_fn(repo):
 def update_fn(repo):
     if not check_for_update_available(repo):
         return
-    print("Update")
-    print("切换 工作 目录 ----->")
-    print("切换前:" + str(os.system("pwd")))
-    os.chdir("./warehouse/" + repo.name + "_realm/" + repo.user)
-    print("切换后:" + str(os.system("pwd")))
+    print("======================================")
+    print("repo update ", repo.user, " - ", repo.name)
+    print("======================================")
+
     # 请求 仓库 分支 信息
     branches = request_repo_branches(repo)
     # 对比 与 本地 的 情况 返回 变更的 分支
@@ -188,7 +192,11 @@ def prepare_branch_dir(branch):
 
 def request_repo_branches(repo):
     try:
-        header = {'Accept': 'application/vnd.github.v3+json'}
+        header = {
+            'Accept': 'application/vnd.github.v3+json',
+            'Authorization': 'token fa5b00ae8df79e2f97b0017d4b22cd49245fa8ad '
+        }
+
         url = 'https://api.github.com/repos/' + repo.user + '/' + repo.name + '/branches'
         res = requests.get(url=url, headers=header)
         json_branches = res.text
@@ -201,6 +209,7 @@ def request_repo_branches(repo):
     #    转化 json
     branches = json.loads(json_branches)
 
+    switch_dir("./warehouse/" + repo.name + "_realm/" + repo.user)
     print("准备 branch dir")
     for branche in branches:
         prepare_branch_dir(branche["name"])
@@ -262,10 +271,12 @@ def compare_branch_info(repo, curr_branches):
 
 def update_branch(repo, modified_branches):
 
-    print("切换 工作 目录 ----->")
-    print("切换前:" + str(os.system("pwd")))
-    os.chdir("./" + repo.name)
-    print("切换后:" + str(os.system("pwd")))
+    # print("切换 工作 目录 ----->")
+    # print("切换前:" + str(os.system("pwd")))
+    # os.chdir("./" + repo.name)
+    # print("切换后:" + str(os.system("pwd")))
+    switch_dir("./warehouse/" + repo.name + "_realm/" + repo.user + "/" +
+               repo.name)
 
     branch_res = os.popen("git branch").readlines()
 
@@ -297,8 +308,6 @@ def update_branch(repo, modified_branches):
             os.chdir(PWD)
             return
 
-    pass
-
 
 def mark_to_test(repo, modified_branches):
     print("标记 需要 测试的 仓库 分支")
@@ -326,6 +335,14 @@ def convert_string_list(ls):
         item = "{0}:{1}".format(l['name'], l['commit']['sha'])
         s.append(item)
     return s
+
+
+def switch_dir(path):
+    print("切换 工作 目录 ----->")
+    os.chdir(PWD)
+    print("切换前:" + str(os.system("pwd")))
+    os.chdir(path)
+    print("切换后:" + str(os.system("pwd")))
 
 
 if __name__ == '__main__':

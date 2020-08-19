@@ -31,6 +31,10 @@
 
 默认OS Ubuntu 20.04
 
+需要 git git-lfs
+
+需要 rust 
+
 需要 redis
 ```
 sudo apt-get install redis-server

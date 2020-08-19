@@ -75,6 +75,7 @@ class RedisManager:
         else:
             return branches
 
+    # 标记 需要 测试 的 仓库 和 分支
     def mark_to_test(self, repo, branches):
         key = repo.user + ":" + repo.name + ":wait_to_test"
         for branch in branches:
@@ -84,8 +85,37 @@ class RedisManager:
         key = "running"
         repos = self.redis.lrange(key, 0, -1)
         if len(repos) != 0:
-            name = repo.user + ":" + repo.name
+            name = repo.user + "-" + repo.name
             if name in repos:
                 return True
             return False
         return False
+
+    def start_running(self, repo):
+        key = "running"
+        self.redis.lpush(key, repo)
+
+    def finish_running(self, repo):
+        key = "running"
+        self.redis.lrem(key, 1, repo)
+
+    def take_need_test(self):
+        repo_list = self.redis.keys("*:wait_to_test")
+        need_test_dict = {}
+        if len(repo_list) == 0:
+            print("没有需要更测试的")
+            return need_test_dict
+        for repo in repo_list:
+            branches = self.redis.smembers(repo)
+
+            # 多余的工作 为了 适配 字符串
+            for b in branches:
+                temp = bytes.decode(b)
+                branches.remove(b)
+                branches.add(temp)
+
+            repo = bytes.decode(repo)
+            repo_info = repo.split(":")
+
+            need_test_dict[repo_info[0] + "-" + repo_info[1]] = branches
+        return need_test_dict

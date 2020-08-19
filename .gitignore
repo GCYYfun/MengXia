@@ -4,3 +4,4 @@
 !/warehouse/zCore_realm/config/all-test-cases.txt
 !/warehouse/zCore_realm/parallel-test.py
 !/warehouse/zCore_realm/statistics.py
+/config/already_clone.yaml
