@@ -24,7 +24,11 @@
 
 ## 项目结构 (未全、持续补充)
 
+[初始版]
 ![MengXia](doc/resources/MengXia.svg)
+
+[第二次修改版]
+![MengXia_v2](doc/resources/MengXia_v2.svg)
 
 
 ## 前提 准备

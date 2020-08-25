@@ -40,6 +40,9 @@ def main():
 
 
 def run_core_test(repo, branch):
+
+    # 过滤 这个 仓库 的 这个 分支 是否 执行
+
     user = repo.split(":")[0]
     name = repo.split(":")[1]
     switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name)
@@ -70,7 +73,27 @@ def run_core_test(repo, branch):
 
 
 def run_libc_test(repo, branch):
-    pass
+
+    # 过滤 这个 仓库 的 这个 分支 是否 执行
+
+    user = repo.split(":")[0]
+    name = repo.split(":")[1]
+
+    ## 进入 仓库
+    print(repo.user, " - ", repo.name, "libc开始运行")
+    switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name)
+    ## build
+    os.system("make rootfs && make libc-test")
+    ## 指定当前工作目录
+    switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name +
+               "/scripts")
+    ## 执行测试
+    os.system("python3 libc-tests.py")
+    switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name +
+               "/zCore")
+    os.system("make clean")
+    print(repo.user, " - ", repo.name, "libc运行结束")
+    os.chdir(PWD)
 
 
 def running(wait_for_test):
