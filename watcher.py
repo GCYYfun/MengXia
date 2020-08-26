@@ -240,18 +240,18 @@ def compare_branch_info(repo, curr_branches):
     for b in curr_branches:
         curr.add(str(b).replace("'", "\""))
     print("curr")
-    print(curr)
+    # print(curr)
 
     last = redisManager.read_branch_info(repo)
     print("last")
-    print(last)
+    # print(last)
 
     if len(last) == 0:
         redisManager.save_branch_info(repo, curr_branches)
 
     change = curr - last
     print("change")
-    print(change)
+    # print(change)
 
     if len(change) != 0:
         print("有变化 : ", change)

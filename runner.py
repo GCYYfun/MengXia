@@ -9,11 +9,22 @@
 ## ====================
 import os
 import sys
+import subprocess
 ## ====================
 
 # Redis
 ## ====================
 import ownlib.redis_manager as rdm
+## ====================
+
+# 解析
+## ====================
+import json
+import yaml
+try:
+    from yaml import CLoader as Loader, CDumper as Dumper
+except:
+    from yaml import Loader, Dumper
 ## ====================
 
 # 定时
@@ -61,12 +72,12 @@ def run_core_test(repo, branch):
     # ## 指定当前工作目录
     switch_dir("./warehouse/" + name + "_realm/" + user)
     # ## 执行测试
-    # os.system("python3 ../parallel-test.py " + branch)
+    os.system("python3 ../parallel-test.py " + branch)
     # os.chdir(PWD)
     switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name +
                "/zCore")
     os.system("make clean")
-    print(repo.user, " - ", repo.name, "coretest运行结束")
+    print(user, " - ", name, "coretest运行结束")
     os.chdir(PWD)
 
     pass
@@ -80,7 +91,7 @@ def run_libc_test(repo, branch):
     name = repo.split(":")[1]
 
     ## 进入 仓库
-    print(repo.user, " - ", repo.name, "libc开始运行")
+    print(user, " - ", name, "libc开始运行")
     switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name)
     ## build
     os.system("make rootfs && make libc-test")
@@ -92,26 +103,47 @@ def run_libc_test(repo, branch):
     switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name +
                "/zCore")
     os.system("make clean")
-    print(repo.user, " - ", repo.name, "libc运行结束")
+    print(user, " - ", name, "libc运行结束")
     os.chdir(PWD)
 
 
 def running(wait_for_test):
     # 设置 占用
-    for k in wait_for_test.keys():
-        redisManager.start_running(k)
-        print("待测试")
-        print(k, ":", wait_for_test[k])
-        for t in wait_for_test[k]:
+    with open("./config/test_spec.yaml", "r") as f:
+        d = f.read()
+        print(d)
+        test_config = yaml.load(d, Loader=Loader)
 
+    for r in wait_for_test.keys():
+        redisManager.start_running(r)
+        repo_name = r.split(":")[1]
+
+        print("待测试")
+        print(r, ":", wait_for_test[r])
+        for b in wait_for_test[r]:
+            try:
+                fns = test_config.get(repo_name).get(b)
+            except:
+                fns = None
             # 进入 仓库 进入 分支 执行 测试
-            run_core_test(k, t)
-            # run_core_test()
-            # run_core_test()
-            # run_core_test()
-            # run_core_test()
-            print(t)
-        redisManager.finish_running(k)
+            if fns != None:
+                print("指定 测试 ")
+                for i in fns:
+                    print(i)
+                    if i == "core_test":
+                        print("运行 coretest")
+                        run_core_test(r, b)
+                    elif i == "libc_test":
+                        print("运行 libctest")
+                        run_libc_test(r, b)
+            else:
+                # run_core_test(r, b)
+                # run_libc_test(r, b)
+                print(repo_name,":",b,"无指定 测试")
+
+            
+        redisManager.finish_running(r)
+        print("运行 完毕 清除 redis")
 
 
 def start_runner():

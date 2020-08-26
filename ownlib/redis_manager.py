@@ -85,7 +85,7 @@ class RedisManager:
         key = "running"
         repos = self.redis.lrange(key, 0, -1)
         if len(repos) != 0:
-            name = repo.user + "-" + repo.name
+            name = repo.user + ":" + repo.name
             if name in repos:
                 return True
             return False
@@ -98,6 +98,8 @@ class RedisManager:
     def finish_running(self, repo):
         key = "running"
         self.redis.lrem(key, 1, repo)
+        repo_key = repo + ":wait_to_test"
+        self.redis.delete(repo_key)
 
     def take_need_test(self):
         repo_list = self.redis.keys("*:wait_to_test")
@@ -117,5 +119,5 @@ class RedisManager:
             repo = bytes.decode(repo)
             repo_info = repo.split(":")
 
-            need_test_dict[repo_info[0] + "-" + repo_info[1]] = branches
+            need_test_dict[repo_info[0] + ":" + repo_info[1]] = branches
         return need_test_dict

@@ -1,0 +1,6 @@
+zCore:
+  master:
+    - libc_test
+    - core_test
+  everytest-by-qemu:
+    - core_test

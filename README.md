@@ -91,7 +91,31 @@ watcher 模块 已完成
 | moudle     | status |
 |------------|--------|
 | watcher    | ok     |
-| runner     |        |
+| runner     | ok     |
 | analysis   |        |
 | statistics |        |
 | feedback   |        |
+
+
+## 模块流程图 （draft）
+### Watcher module
+```
+观测 模块、负责拉取和更新repo
+```
+![watcher](watcher.drawio.png)
+
+### Runner module
+```
+运行 模块、负责执行更新后的测试
+```
+![runner](runner.drawio.png)
+### Dispatcher module
+```
+分发 模块、负责针对不同平台数据的分发和环境的建立
+```
+![dispatcher](dispatcher.drawio.png)
+### Analysis module
+```
+分析 模块、负责对结果的整理分析 、形成报告文件文件
+```
+![analysis](analysis.drawio.png)
