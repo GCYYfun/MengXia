@@ -1,6 +1,7 @@
 # 系统
 ## ====================
 import os
+import subprocess
 import sys
 ## ====================
 
@@ -60,15 +61,17 @@ def clone_fn(repo):
     # print("切换前:" + str(os.system("pwd")))
     # os.chdir("./warehouse/" + repo.name + "_realm/" + repo.user)
     # print("切换后:" + str(os.system("pwd")))
-    switch_dir("./warehouse/" + repo.name + "_realm/" + repo.user)
+    # switch_dir("./warehouse/" + repo.name + "_realm/" + repo.user)
     # 2.  clone 仓库
     try:
         print("开始 clone")
         # os.system("git clone "+repo.url+" --recursive --depth 1")
-        os.system("git clone " + repo.url + " --recursive")
+        # os.system("git clone " + repo.url + " --recursive")
+        subprocess.run("git clone " + repo.url + " --recursive",shell=True,check=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
     except:
+        subprocess.run("rm -rf warehouse/" + repo.name + "_realm/" + repo.user + "/" + repo.name)
         print("clone 失败 ，重置工作目录 退出 clone")
-        os.chdir(PWD)
+
         return
     #     clone 完成 标记
     res = redisManager.add_exist_repo(repo.url)
@@ -101,7 +104,7 @@ def clone_fn(repo):
     branches = request_repo_branches(repo)
     #    记录分支
     redisManager.save_branch_info(repo, branches)
-    os.chdir(PWD)
+    # os.chdir(PWD)
 
 
 def update_fn(repo):
@@ -119,7 +122,7 @@ def update_fn(repo):
         update_branch(repo, need_branches)
         mark_to_test(repo, need_branches)
         update_branch_info(repo, branches)
-    os.chdir(PWD)
+    # os.chdir(PWD)
     # try:
     #     header = {'Accept': 'application/vnd.github.v3+json'}
     #     url = 'https://api.github.com/repos/' + repo.user + '/' + repo.name + '/branches'
@@ -147,11 +150,11 @@ def register_watch(repo, clone_fn, update_fn):
         schedule.every(10).seconds.do(update_fn, repo)
     else:
         print(repo.user + ":" + repo.name + " repo不存在 clone并 开始 监测更新")
-        if os.path.exists("warehouse/" + repo.name + "_realm/" + repo.user +
-                          "/" + repo.name):
-            os.system("rm -rf warehouse/" + repo.name + "_realm/" + repo.user +
-                      "/" + repo.name)
-        os.chdir(PWD)
+        # if os.path.exists("warehouse/" + repo.name + "_realm/" + repo.user +
+        #                   "/" + repo.name):
+        #     os.system("rm -rf warehouse/" + repo.name + "_realm/" + repo.user +
+        #               "/" + repo.name)
+        # os.chdir(PWD)
         clone_fn(repo)
         schedule.every(1).minutes.do(update_fn, repo)
 
@@ -173,21 +176,33 @@ def main():
 def prepare_dir(repo):
     # 幂等性
     print("准备 文件目录")
-    os.system("mkdir -p warehouse/" + repo.name + "_realm/config")
-    os.system("mkdir -p warehouse/" + repo.name + "_realm/" + repo.user +
-              "/config")
-    # os.system("cp config/all-test-cases.txt " + repo.user +
-    #           "/config/all-test-cases.txt")
-    os.system("mkdir -p warehouse/" + repo.name + "_realm/" + repo.user +
-              "/diff")
-    os.system("mkdir -p warehouse/" + repo.name + "_realm/" + repo.user +
-              "/result")
+    subprocess.run("mkdir -p warehouse/" + repo.name + "_realm/config",shell=True)
+    subprocess.run("mkdir -p warehouse/" + repo.name + "_realm/scripts",shell=True)
+    subprocess.run("mkdir -p warehouse/" + repo.name + "_realm/" + repo.user + "/config",shell=True)
+    subprocess.run("mkdir -p warehouse/" + repo.name + "_realm/" + repo.user + "/diff",shell=True)
+    subprocess.run("mkdir -p warehouse/" + repo.name + "_realm/" + repo.user + "/result",shell=True)
+    subprocess.run("mkdir -p warehouse/" + repo.name + "_realm/" + repo.user + "/logfile",shell=True)
+    
+    # os.system("mkdir -p warehouse/" + repo.name + "_realm/config")
+    # os.system("mkdir -p warehouse/" + repo.name + "_realm/" + repo.user +
+    #           "/config")
+    # # os.system("cp config/all-test-cases.txt " + repo.user +
+    # #           "/config/all-test-cases.txt")
+    # os.system("mkdir -p warehouse/" + repo.name + "_realm/" + repo.user +
+    #           "/diff")
+    # os.system("mkdir -p warehouse/" + repo.name + "_realm/" + repo.user +
+    #           "/result")
 
 
-def prepare_branch_dir(branch):
-    os.system("mkdir -p config/" + branch)
-    os.system("mkdir -p diff/" + branch)
-    os.system("mkdir -p result/" + branch)
+def prepare_branch_dir(branch,repo):
+    
+    subprocess.run("mkdir -p config/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+    subprocess.run("mkdir -p diff/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+    subprocess.run("mkdir -p result/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+    subprocess.run("mkdir -p logfile/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+    # os.system("mkdir -p config/" + branch)
+    # os.system("mkdir -p diff/" + branch)
+    # os.system("mkdir -p result/" + branch)
 
 
 def request_repo_branches(repo):
@@ -202,17 +217,17 @@ def request_repo_branches(repo):
         json_branches = res.text
     except:
         print("请求失败")
-        os.chdir(PWD)
+        # os.chdir(PWD)
         return []
     chech_branch_json_validity(json_branches)
     print("请求成功")
     #    转化 json
     branches = json.loads(json_branches)
 
-    switch_dir("./warehouse/" + repo.name + "_realm/" + repo.user)
+    # switch_dir("./warehouse/" + repo.name + "_realm/" + repo.user)
     print("准备 branch dir")
     for branche in branches:
-        prepare_branch_dir(branche["name"])
+        prepare_branch_dir(branche["name"],repo)
     print("准备 完毕")
     branches_list = convert_string_list(branches)
     return branches_list
@@ -222,35 +237,37 @@ def chech_branch_json_validity(json_branches):
     #    边界 设置
     if len(json_branches) == 0:
         print("请求失败")
-        os.chdir(PWD)
+        # os.chdir(PWD)
         return False
     if json_branches.startswith('{'):
         print("值不对 {")
-        os.chdir(PWD)
+        # os.chdir(PWD)
         return False
     return True
 
 
 def compare_branch_info(repo, curr_branches):
     res = []
-    print(curr_branches)
+    # print(curr_branches)
     if len(curr_branches) == 0:
         return res
+    print("比较 分支 信息")
+    # print("当前远程 仓库 上 的 分支信息 ")
     curr = set()
     for b in curr_branches:
         curr.add(str(b).replace("'", "\""))
-    print("curr")
+    # print("curr")
     # print(curr)
 
     last = redisManager.read_branch_info(repo)
-    print("last")
+    # print("last")
     # print(last)
 
     if len(last) == 0:
         redisManager.save_branch_info(repo, curr_branches)
 
     change = curr - last
-    print("change")
+    # print("change")
     # print(change)
 
     if len(change) != 0:
@@ -264,7 +281,7 @@ def compare_branch_info(repo, curr_branches):
                 continue
             res.append(branch)
     else:
-        print("无需更新")
+        print("无变化、无需更新")
     print(res)
     return res
 
@@ -275,14 +292,14 @@ def update_branch(repo, modified_branches):
     # print("切换前:" + str(os.system("pwd")))
     # os.chdir("./" + repo.name)
     # print("切换后:" + str(os.system("pwd")))
-    switch_dir("./warehouse/" + repo.name + "_realm/" + repo.user + "/" +
-               repo.name)
+    # switch_dir("./warehouse/" + repo.name + "_realm/" + repo.user + "/" +
+    #            repo.name)
 
-    branch_res = os.popen("git branch").readlines()
+    tmp = subprocess.run("git branch",shell=True,stdout=subprocess.PIPE,encoding="utf-8",cwd="./warehouse/" + repo.name + "_realm/" + repo.user + "/" + repo.name)
+    branch_res = list(map(lambda x: x.strip(),tmp.stdout.strip().split("\n")))
 
     for branch in modified_branches:
         for br in branch_res:
-            br = br.strip()
             print("匹配 ", br)
             if br.startswith("*") and branch == br.replace("*", "").strip():
                 print("匹配 成功 且 当前分支 就是", branch)
@@ -290,22 +307,23 @@ def update_branch(repo, modified_branches):
             if br == branch:
                 print("匹配 成功 ")
                 print("checkout :", branch)
-                os.system("git checkout " + branch)
+                subprocess.run("git checkout " + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user + "/" + repo.name)
                 break
-            print("匹配  失败")
+            print("branch 匹配  失败")
         else:
             print("创建 分支 并 切换")
-            os.system("git checkout -b " + branch)
+            subprocess.run("git checkout -b " + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user + "/" + repo.name)
 
         try:
             print("pulling....")
-            res1 = os.popen("git fetch origin " + branch).readline()
-            print(res1)
-            res2 = os.popen("git reset --hard FETCH_HEAD").readline()
-            print(res2)
+            subprocess.run("git fetch origin " + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user + "/" + repo.name)
+            # res1 = os.popen("git fetch origin " + branch).readline()
+            # print(res1)
+            subprocess.run("git reset --hard FETCH_HEAD",shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user + "/" + repo.name)
+            # res2 = os.popen("git reset --hard FETCH_HEAD").readline()
+            # print(res2)
         except:
             print("pull 不符合预期")
-            os.chdir(PWD)
             return
 
 
@@ -337,12 +355,15 @@ def convert_string_list(ls):
     return s
 
 
-def switch_dir(path):
-    print("切换 工作 目录 ----->")
-    os.chdir(PWD)
-    print("切换前:" + str(os.system("pwd")))
-    os.chdir(path)
-    print("切换后:" + str(os.system("pwd")))
+# def switch_dir(path):
+#     print("切换 工作 目录 ----->")
+#     os.chdir(PWD)
+    
+#     print("切换前:")
+#     subprocess.run("pwd")
+#     os.chdir(path)
+#     print("切换后:")
+#     subprocess.run("pwd")
 
 
 if __name__ == '__main__':
