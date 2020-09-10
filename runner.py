@@ -40,14 +40,14 @@ redisManager = rdm.RedisManager()
 def main():
     os.chdir(PWD)  # 设置工作目录
     # 定时 读取 redis
-    wait_for_test = take_need_test_branch()
+    # wait_for_test = take_need_test_branch()
 
-    running(wait_for_test)
-    # start_runner()
+    # running(wait_for_test)
+    start_runner()
 
     ## 开启监听
-    # while True:
-    #     schedule.run_pending()
+    while True:
+        schedule.run_pending()
 
 
 def run_core_test(repo, branch):
@@ -56,8 +56,9 @@ def run_core_test(repo, branch):
 
     user = repo.split(":")[0]
     name = repo.split(":")[1]
-    switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name)
-    os.system("git checkout " + branch)
+    subprocess.run("git checkout " + branch,shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name)
+    # switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name)
+    # os.system("git checkout " + branch)
 
     print(user, " - ", name, "coretest开始运行")
     ## 进入 仓库
@@ -65,20 +66,28 @@ def run_core_test(repo, branch):
     # os.chdir("./warehouse/" + repo.name + "_realm/" + repo.user + "/" +
     #          repo.name + "/zCore")
     # ## build
-    switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name +
-               "/zCore")
-    os.system("make build-parallel-test mode=release")
+    # switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name +
+    #            "/zCore")
+    # os.system("make build-parallel-test mode=release")
+
+    # subprocess.run("make build-parallel-test mode=release",shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name + "/zCore")
+    subprocess.run("python3 core-tests.py",shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name + "/scripts")
+    
     # os.chdir(PWD)
     # ## 指定当前工作目录
-    switch_dir("./warehouse/" + name + "_realm/" + user)
+    # switch_dir("./warehouse/" + name + "_realm/" + user)
     # ## 执行测试
-    os.system("python3 ../parallel-test.py " + branch)
+    # os.system("python3 ../parallel-test.py " + branch)
+    
+    # subprocess.run("python3 parallel-test.py " + branch,shell=True,cwd="warehouse/" + name + "_realm/scripts")
+    
     # os.chdir(PWD)
-    switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name +
-               "/zCore")
-    os.system("make clean")
+    # switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name +
+    #            "/zCore")
+    # os.system("make clean")
+    subprocess.run("make clean",shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name + "/zCore")
     print(user, " - ", name, "coretest运行结束")
-    os.chdir(PWD)
+    # os.chdir(PWD)
 
     pass
 
@@ -92,23 +101,31 @@ def run_libc_test(repo, branch):
 
     ## 进入 仓库
     print(user, " - ", name, "libc开始运行")
-    switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name)
+    subprocess.run("git checkout " + branch,shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name)
+    # switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name)
     ## build
-    os.system("make rootfs && make libc-test")
+    subprocess.run("make rootfs && make libc-test",shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name)
+    # os.system("make rootfs && make libc-test")
     ## 指定当前工作目录
-    switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name +
-               "/scripts")
+    # switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name +
+    #            "/scripts")
     ## 执行测试
-    os.system("python3 libc-tests.py")
-    switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name +
-               "/zCore")
-    os.system("make clean")
+    subprocess.run("python3 parallel-test.py " + branch,shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name + "/scripts")
+    # os.system("python3 libc-tests.py")
+    # switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name +
+    #            "/zCore")
+
+    # os.system("make clean")
     print(user, " - ", name, "libc运行结束")
-    os.chdir(PWD)
+    # os.chdir(PWD)
 
 
-def running(wait_for_test):
+def running():
     # 设置 占用
+
+    # temp
+    wait_for_test = take_need_test_branch()
+
     with open("./config/test_spec.yaml", "r") as f:
         d = f.read()
         print(d)
@@ -147,7 +164,7 @@ def running(wait_for_test):
 
 
 def start_runner():
-    schedule.every(10).seconds.do(take_need_test_branch)
+    schedule.every(10).seconds.do(running)
 
 
 def take_need_test_branch():
