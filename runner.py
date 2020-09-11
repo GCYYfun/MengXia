@@ -72,6 +72,7 @@ def run_core_test(repo, branch):
 
     # subprocess.run("make build-parallel-test mode=release",shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name + "/zCore")
     subprocess.run("python3 core-tests.py",shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name + "/scripts")
+    # subprocess.run("python3 core-tests.py",shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name + "/scripts")
     
     # os.chdir(PWD)
     # ## 指定当前工作目录
@@ -172,12 +173,12 @@ def take_need_test_branch():
     return need_test
 
 
-def switch_dir(path):
-    print("切换 工作 目录 ----->")
-    os.chdir(PWD)
-    print("切换前:" + str(os.system("pwd")))
-    os.chdir(path)
-    print("切换后:" + str(os.system("pwd")))
+# def switch_dir(path):
+#     print("切换 工作 目录 ----->")
+#     os.chdir(PWD)
+#     print("切换前:" + str(os.system("pwd")))
+#     os.chdir(path)
+#     print("切换后:" + str(os.system("pwd")))
 
 
 if __name__ == '__main__':
