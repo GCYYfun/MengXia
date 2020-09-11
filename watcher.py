@@ -69,7 +69,7 @@ def clone_fn(repo):
         # os.system("git clone " + repo.url + " --recursive")
         subprocess.run("git clone " + repo.url + " --recursive",shell=True,check=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
     except:
-        subprocess.run("rm -rf warehouse/" + repo.name + "_realm/" + repo.user + "/" + repo.name)
+        subprocess.run("rm -rf warehouse/" + repo.name + "_realm/" + repo.user + "/" + repo.name,shell=True)
         print("clone 失败 ，重置工作目录 退出 clone")
 
         return

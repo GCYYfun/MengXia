@@ -172,12 +172,12 @@ def take_need_test_branch():
     return need_test
 
 
-def switch_dir(path):
-    print("切换 工作 目录 ----->")
-    os.chdir(PWD)
-    print("切换前:" + str(os.system("pwd")))
-    os.chdir(path)
-    print("切换后:" + str(os.system("pwd")))
+# def switch_dir(path):
+#     print("切换 工作 目录 ----->")
+#     os.chdir(PWD)
+#     print("切换前:" + str(os.system("pwd")))
+#     os.chdir(path)
+#     print("切换后:" + str(os.system("pwd")))
 
 
 if __name__ == '__main__':
