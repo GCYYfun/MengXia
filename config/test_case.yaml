@@ -1,0 +1,6 @@
+core-test:
+    Bti:
+        - Create
+        - Pin
+    BadAccessTest:
+        - InvalidMappedAddressFails
