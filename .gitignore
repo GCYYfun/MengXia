@@ -4,9 +4,15 @@
 !/warehouse/zCore_realm/config/all-test-cases.txt
 !/warehouse/zCore_realm/parallel-test.py
 !/warehouse/zCore_realm/statistics.py
+<<<<<<< HEAD
 !/warehouse/zCore_realm/scripts/
 !/warehouse/zCore_realm/config/
 /config/already_clone.yaml
 test.py
 start.py
 render.html
+=======
+/config/already_clone.yaml
+test.py
+start.py
+>>>>>>> 9189832fde4a59a760664ff20cd17062e2b0f69a
