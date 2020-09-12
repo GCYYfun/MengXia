@@ -1,4 +1,4 @@
 zCore:
   master:
-    - libc_test
+    # - libc_test
     - core_test

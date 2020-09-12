@@ -13,3 +13,8 @@ core-test:
         - WaitManyIsSignaledOnAnyElementWrite
         - WaitManyIsSignaledForBothWrites
         - ReadWhenEmptyReturnsShouldWait
+    ClockTest:
+        - ClockMonotonic
+        - DeadlineAfter
+    ExecutableTlsTest:
+        - BasicInitalizersInThread

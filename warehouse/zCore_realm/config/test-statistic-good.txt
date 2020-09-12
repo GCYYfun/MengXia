@@ -1,0 +1,30 @@
+1 ============================== Bti.Create ==============================
+[ RUN      ] Bti.Create
+[       OK ] Bti.Create (0 ms)
+============================== End ==============================
+
+
+2 ============================== Bti.Pin ==============================
+[ RUN      ] Bti.Pin
+[       OK ] Bti.Pin (0 ms)
+============================== End ==============================
+
+
+3 ============================== ConditionalVariableTest.BroadcastSignalThreadWait ==============================
+[ RUN      ] ConditionalVariableTest.BroadcastSignalThreadWait
+[       OK ] ConditionalVariableTest.BroadcastSignalThreadWait (1 ms)
+============================== End ==============================
+
+
+4 ============================== ConditionalVariableTest.SignalThreadWait ==============================
+[ RUN      ] ConditionalVariableTest.SignalThreadWait
+[       OK ] ConditionalVariableTest.SignalThreadWait (1 ms)
+============================== End ==============================
+
+
+5 ============================== ConditionalVariableTest.ConditionalVariablesTimeout ==============================
+[ RUN      ] ConditionalVariableTest.ConditionalVariablesTimeout
+[       OK ] ConditionalVariableTest.ConditionalVariablesTimeout (6 ms)
+============================== End ==============================
+
+

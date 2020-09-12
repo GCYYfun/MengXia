@@ -182,6 +182,7 @@ def prepare_dir(repo):
     subprocess.run("mkdir -p warehouse/" + repo.name + "_realm/" + repo.user + "/diff",shell=True)
     subprocess.run("mkdir -p warehouse/" + repo.name + "_realm/" + repo.user + "/result",shell=True)
     subprocess.run("mkdir -p warehouse/" + repo.name + "_realm/" + repo.user + "/logfile",shell=True)
+    subprocess.run("mkdir -p warehouse/" + repo.name + "_realm/" + repo.user + "/help_info",shell=True)
     
     # os.system("mkdir -p warehouse/" + repo.name + "_realm/config")
     # os.system("mkdir -p warehouse/" + repo.name + "_realm/" + repo.user +
@@ -200,6 +201,7 @@ def prepare_branch_dir(branch,repo):
     subprocess.run("mkdir -p diff/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
     subprocess.run("mkdir -p result/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
     subprocess.run("mkdir -p logfile/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+    subprocess.run("mkdir -p help_info/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
     # os.system("mkdir -p config/" + branch)
     # os.system("mkdir -p diff/" + branch)
     # os.system("mkdir -p result/" + branch)

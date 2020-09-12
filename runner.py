@@ -71,7 +71,7 @@ def run_core_test(repo, branch):
     # os.system("make build-parallel-test mode=release")
 
     # subprocess.run("make build-parallel-test mode=release",shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name + "/zCore")
-    subprocess.run("python3 core-tests.py",shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name + "/scripts")
+    subprocess.run("python3 core_test.py " + user +" "+ branch,shell=True,cwd="warehouse/" + name + "_realm/" + "scripts")
     # subprocess.run("python3 core-tests.py",shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name + "/scripts")
     
     # os.chdir(PWD)

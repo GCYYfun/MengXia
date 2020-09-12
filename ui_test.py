@@ -1,10 +1,22 @@
-from pyecharts.charts import Bar
+from pyecharts import options as opts
+from pyecharts.charts import Liquid
+from pyecharts.commons.utils import JsCode
 
-bar = Bar()
-bar.add_xaxis(["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"])
-bar.add_yaxis("商家A", [5, 20, 36, 10, 75, 90])
-# render 会生成本地 HTML 文件，默认会在当前目录生成 render.html 文件
-# 也可以传入路径参数，如 bar.render("mycharts.html")
-bar.render()
-
-
+c = (
+    Liquid()
+    .add(
+        "lq",
+        [0.954],
+        label_opts=opts.LabelOpts(
+            font_size=50,
+            formatter=JsCode(
+                """function (param) {
+                    return (Math.floor(param.value * 10000) / 100) + '%';
+                }"""
+            ),
+            position="inside",
+        ),
+    )
+    .set_global_opts(title_opts=opts.TitleOpts(title="完成度"))
+    .render("precision.html")
+)

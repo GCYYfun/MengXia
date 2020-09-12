@@ -1,0 +1,7 @@
+(master) 测例统计:
+[result]    0    Bti.Create    PASSED
+[result]    1    Bti.Pin    PASSED
+[result]    2    BadAccessTest.InvalidMappedAddressFails    PANICKED
+[result]    3    ConditionalVariableTest.BroadcastSignalThreadWait    PASSED
+[result]    4    ConditionalVariableTest.SignalThreadWait    PASSED
+[result]    5    ConditionalVariableTest.ConditionalVariablesTimeout    PASSED

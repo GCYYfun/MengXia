@@ -1,0 +1,855 @@
+qemu-system-x86_64: -device ide-drive,drive=disk,bus=ahci.0: warning: 'ide-drive' is deprecated, please use 'ide-hd' or 'ide-cd' instead
+[2J[01;01H[=3h[2J[01;01H[0m[35m[40m[0m[37m[40mBdsDxe: failed to load Boot0001 "UEFI QEMU HARDDISK QM00013 " from PciRoot(0x0)/Pci(0x2,0x0)/Sata(0x0,0xFFFF,0x0): Not Found
+BdsDxe: loading Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+BdsDxe: starting Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+INFO: bootloader is running
+INFO: opening file: \EFI\Boot\rboot.conf
+INFO: loading file to memory
+INFO: switching graphic mode
+INFO: config: Config {
+INFO:     kernel_stack_address: 0xffffff0100000000,
+INFO:     kernel_stack_size: 0x200,
+INFO:     physical_memory_offset: 0xffff800000000000,
+INFO:     kernel_path: "\\EFI\\zCore\\zcore.elf",
+INFO:     resolution: Some(
+INFO:         (
+INFO:             0x400,
+INFO:             0x300,
+INFO:         ),
+INFO:     ),
+INFO:     initramfs: Some(
+INFO:         "\\EFI\\zCore\\fuchsia.zbi",
+INFO:     ),
+INFO:     cmdline: "LOG=warn:userboot=test/core-standalone-test:userboot.shutdown:core-tests=Bti.Createcmdline=LOG=warn:userboot=test/core-standalone-test:userboot.shutdown:core-tests=Bti.Create",
+INFO: }
+INFO: acpi2: 0x7fbfa014
+INFO: smbios: 0x7fbcc000
+INFO: opening file: \EFI\zCore\zcore.elf
+INFO: loading file to memory
+INFO: opening file: \EFI\zCore\fuchsia.zbi
+INFO: loading file to memory
+INFO: mapping ELF
+INFO: mapping stack at 0xffffff0100000000
+INFO: mapping physical memory
+INFO: exit boot services
+[93m[901.943806ms  WARN 0 0:0] get_acpi_table error: RsdpIncorrectSignature
+[0muserboot: option "LOG=warn"
+userboot: option "userboot=test/core-standalone-test"
+userboot: option "userboot.shutdown"
+userboot: option "core-tests=Bti.Createcmdline=LOG=warn"
+userboot: option "userboot=test/core-standalone-test"
+userboot: option "userboot.shutdown"
+userboot: option "core-tests=Bti.Create"
+userboot: decompressed BOOTFS to VMO!
+userboot: searching bootfs for 'test/core-standalone-test'
+userboot: 'test/core-standalone-test' has PT_INTERP "lib/ld.so.1"
+userboot: searching bootfs for 'lib/ld.so.1'
+userboot: userboot: loaded lib/ld.so.1 at 0x18200000000, entry point 0x1820005772c
+userboot: userboot: loaded vDSO at 0x182000af000, entry point 0x182000b6e38
+userboot: process test/core-standalone-test started.
+userboot: waiting for loader-service requests...
+[93m[2.491516677s  WARN 0 0:0] HACKED: test args = "test\u{0}-f\u{0}Bti.Create\u{0}"
+[0muserboot: searching bootfs for 'lib/libfdio.so'
+userboot: searching bootfs for 'lib/libmini-process.so'
+userboot: searching bootfs for 'lib/libinspector.so'
+userboot: searching bootfs for 'lib/libtest-exceptions.so'
+userboot: searching bootfs for 'lib/libsyslog.so'
+userboot: searching bootfs for 'lib/libunittest.so'
+userboot: searching bootfs for 'lib/libc++.so.2'
+userboot: searching bootfs for 'lib/libc++abi.so.1'
+userboot: searching bootfs for 'lib/libunwind.so.1'
+{{{reset}}}
+{{{module:0:test:elf:56cc8d497fd54e13}}}
+{{{mmap:0x10200000000:0x96000:load:0:r:0}}}
+{{{mmap:0x10200096000:0x3c5000:load:0:rx:0x96000}}}
+{{{mmap:0x1020045b000:0x10000:load:0:rw:0x45b000}}}
+{{{mmap:0x1020046b000:0x1000:load:0:rw:0x46b000}}}
+dso: id=56cc8d497fd54e13 base=0x0000010200000000 name=test
+{{{module:0x3:libfdio.so:elf:dafc3f065a1f5b25}}}
+{{{mmap:0x182000f8000:0x16000:load:0x3:r:0}}}
+{{{mmap:0x1820010e000:0x59000:load:0x3:rx:0x16000}}}
+{{{mmap:0x18200167000:0x3000:load:0x3:rw:0x6f000}}}
+{{{mmap:0x1820016a000:0x4000:load:0x3:rw:0x72000}}}
+dso: id=dafc3f065a1f5b25 base=0x00000182000f8000 name=libfdio.so
+{{{module:0x4:libmini-process.so:elf:3d7341f1bacf14c8}}}
+{{{mmap:0x1820016e000:0x2000:load:0x4:r:0}}}
+{{{mmap:0x18200170000:0x2000:load:0x4:rx:0x2000}}}
+{{{mmap:0x18200172000:0x1000:load:0x4:rw:0x4000}}}
+{{{mmap:0x18200173000:0x1000:load:0x4:rw:0x5000}}}
+dso: id=3d7341f1bacf14c8 base=0x000001820016e000 name=libmini-process.so
+{{{module:0x5:libinspector.so:elf:2f69b8107fa3dc4e}}}
+{{{mmap:0x18200174000:0x6000:load:0x5:r:0}}}
+{{{mmap:0x1820017a000:0x15000:load:0x5:rx:0x6000}}}
+{{{mmap:0x1820018f000:0x1000:load:0x5:rw:0x1b000}}}
+{{{mmap:0x18200190000:0xf000:load:0x5:rw:0x1c000}}}
+dso: id=2f69b8107fa3dc4e base=0x0000018200174000 name=libinspector.so
+{{{module:0x6:libtest-exceptions.so:elf:9b11c8f781a20eb7}}}
+{{{mmap:0x1820019f000:0x1000:load:0x6:r:0}}}
+{{{mmap:0x182001a0000:0x1000:load:0x6:rx:0x1000}}}
+{{{mmap:0x182001a1000:0x1000:load:0x6:rw:0x2000}}}
+dso: id=9b11c8f781a20eb7 base=0x000001820019f000 name=libtest-exceptions.so
+{{{module:0x7:libsyslog.so:elf:3064f8b7abc34a74}}}
+{{{mmap:0x182001a2000:0x4000:load:0x7:r:0}}}
+{{{mmap:0x182001a6000:0x7000:load:0x7:rx:0x4000}}}
+{{{mmap:0x182001ad000:0x1000:load:0x7:rw:0xb000}}}
+{{{mmap:0x182001ae000:0x1000:load:0x7:rw:0xc000}}}
+dso: id=3064f8b7abc34a74 base=0x00000182001a2000 name=libsyslog.so
+{{{module:0x8:libunittest.so:elf:d607ffdf9c366a5e}}}
+{{{mmap:0x182001af000:0x3000:load:0x8:r:0}}}
+{{{mmap:0x182001b2000:0x2000:load:0x8:rx:0x3000}}}
+{{{mmap:0x182001b4000:0x1000:load:0x8:rw:0x5000}}}
+{{{mmap:0x182001b5000:0x2000:load:0x8:rw:0x6000}}}
+dso: id=d607ffdf9c366a5e base=0x00000182001af000 name=libunittest.so
+{{{module:0x2:<vDSO>:elf:43ee7ebb5dc809d4}}}
+{{{mmap:0x182000af000:0x7000:load:0x2:r:0}}}
+{{{mmap:0x182000b6000:0x2000:load:0x2:rx:0x7000}}}
+dso: id=43ee7ebb5dc809d4 base=0x00000182000af000 name=<vDSO>
+{{{module:0x9:libc++.so.2:elf:f0859e1ce39d0113}}}
+{{{mmap:0x182001b7000:0x51000:load:0x9:r:0}}}
+{{{mmap:0x18200208000:0x74000:load:0x9:rx:0x51000}}}
+{{{mmap:0x1820027c000:0x6000:load:0x9:rw:0xc5000}}}
+{{{mmap:0x18200282000:0x7000:load:0x9:rw:0xcb000}}}
+dso: id=f0859e1ce39d0113 base=0x00000182001b7000 name=libc++.so.2
+{{{module:0xa:libc++abi.so.1:elf:a5f4709b440b951e}}}
+{{{mmap:0x18200289000:0x12000:load:0xa:r:0}}}
+{{{mmap:0x1820029b000:0x1c000:load:0xa:rx:0x12000}}}
+{{{mmap:0x182002b7000:0x4000:load:0xa:rw:0x2e000}}}
+{{{mmap:0x182002bb000:0x1000:load:0xa:rw:0x32000}}}
+dso: id=a5f4709b440b951e base=0x0000018200289000 name=libc++abi.so.1
+{{{module:0x1:libc.so:elf:1b1e17757ec5c736}}}
+{{{mmap:0x18200000000:0x4f000:load:0x1:r:0}}}
+{{{mmap:0x1820004f000:0x5b000:load:0x1:rx:0x4f000}}}
+{{{mmap:0x182000aa000:0x2000:load:0x1:rw:0xaa000}}}
+{{{mmap:0x182000ac000:0x3000:load:0x1:rw:0xac000}}}
+dso: id=1b1e17757ec5c736 base=0x0000018200000000 name=libc.so
+{{{module:0xb:libunwind.so.1:elf:dc66c3d80e22e1eb}}}
+{{{mmap:0x182002bc000:0x4000:load:0xb:r:0}}}
+{{{mmap:0x182002c0000:0x6000:load:0xb:rx:0x4000}}}
+{{{mmap:0x182002c6000:0x1000:load:0xb:rw:0xa000}}}
+{{{mmap:0x182002c7000:0x1000:load:0xb:rw:0xb000}}}
+dso: id=dc66c3d80e22e1eb base=0x00000182002bc000 name=libunwind.so.1
+[93m[2.546397811s  WARN 0 0:0] HACKED: test args = "test\u{0}-f\u{0}Bti.Create\u{0}"
+[0m*** Running standalone Zircon core tests ***
+[==========] Flag Values:
+             --gtest_filter = Bti.Create
+             --gtest_random_seed = 2
+[==========] 
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from Bti
+[ RUN      ] Bti.Create
+[       OK ] Bti.Create (0 ms)
+[----------] 1 test from Bti (1 ms total)
+
+[----------] Global test environment tear-down.
+[==========] 1 test from 1 test case ran (3 ms total).
+[  PASSED  ] 1 testqemu-system-x86_64: -device ide-drive,drive=disk,bus=ahci.0: warning: 'ide-drive' is deprecated, please use 'ide-hd' or 'ide-cd' instead
+[2J[01;01H[=3h[2J[01;01H[0m[35m[40m[0m[37m[40mBdsDxe: failed to load Boot0001 "UEFI QEMU HARDDISK QM00013 " from PciRoot(0x0)/Pci(0x2,0x0)/Sata(0x0,0xFFFF,0x0): Not Found
+BdsDxe: loading Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+BdsDxe: starting Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+INFO: bootloader is running
+INFO: opening file: \EFI\Boot\rboot.conf
+INFO: loading file to memory
+INFO: switching graphic mode
+INFO: config: Config {
+INFO:     kernel_stack_address: 0xffffff0100000000,
+INFO:     kernel_stack_size: 0x200,
+INFO:     physical_memory_offset: 0xffff800000000000,
+INFO:     kernel_path: "\\EFI\\zCore\\zcore.elf",
+INFO:     resolution: Some(
+INFO:         (
+INFO:             0x400,
+INFO:             0x300,
+INFO:         ),
+INFO:     ),
+INFO:     initramfs: Some(
+INFO:         "\\EFI\\zCore\\fuchsia.zbi",
+INFO:     ),
+INFO:     cmdline: "LOG=warn:userboot=test/core-standalone-test:userboot.shutdown:core-tests=Bti.Pin",
+INFO: }
+INFO: acpi2: 0x7fbfa014
+INFO: smbios: 0x7fbcc000
+INFO: opening file: \EFI\zCore\zcore.elf
+INFO: loading file to memory
+INFO: opening file: \EFI\zCore\fuchsia.zbi
+INFO: loading file to memory
+INFO: mapping ELF
+INFO: mapping stack at 0xffffff0100000000
+INFO: mapping physical memory
+INFO: exit boot services
+[93m[882.281526ms  WARN 0 0:0] get_acpi_table error: RsdpIncorrectSignature
+[0muserboot: option "LOG=warn"
+userboot: option "userboot=test/core-standalone-test"
+userboot: option "userboot.shutdown"
+userboot: option "core-tests=Bti.Pin"
+userboot: decompressed BOOTFS to VMO!
+userboot: searching bootfs for 'test/core-standalone-test'
+userboot: 'test/core-standalone-test' has PT_INTERP "lib/ld.so.1"
+userboot: searching bootfs for 'lib/ld.so.1'
+userboot: userboot: loaded lib/ld.so.1 at 0x18200000000, entry point 0x1820005772c
+userboot: userboot: loaded vDSO at 0x182000af000, entry point 0x182000b6e38
+userboot: process test/core-standalone-test started.
+userboot: waiting for loader-service requests...
+[93m[2.42179483s  WARN 0 0:0] HACKED: test args = "test\u{0}-f\u{0}Bti.Pin\u{0}"
+[0muserboot: searching bootfs for 'lib/libfdio.so'
+userboot: searching bootfs for 'lib/libmini-process.so'
+userboot: searching bootfs for 'lib/libinspector.so'
+userboot: searching bootfs for 'lib/libtest-exceptions.so'
+userboot: searching bootfs for 'lib/libsyslog.so'
+userboot: searching bootfs for 'lib/libunittest.so'
+userboot: searching bootfs for 'lib/libc++.so.2'
+userboot: searching bootfs for 'lib/libc++abi.so.1'
+userboot: searching bootfs for 'lib/libunwind.so.1'
+{{{reset}}}
+{{{module:0:test:elf:56cc8d497fd54e13}}}
+{{{mmap:0x10200000000:0x96000:load:0:r:0}}}
+{{{mmap:0x10200096000:0x3c5000:load:0:rx:0x96000}}}
+{{{mmap:0x1020045b000:0x10000:load:0:rw:0x45b000}}}
+{{{mmap:0x1020046b000:0x1000:load:0:rw:0x46b000}}}
+dso: id=56cc8d497fd54e13 base=0x0000010200000000 name=test
+{{{module:0x3:libfdio.so:elf:dafc3f065a1f5b25}}}
+{{{mmap:0x182000f8000:0x16000:load:0x3:r:0}}}
+{{{mmap:0x1820010e000:0x59000:load:0x3:rx:0x16000}}}
+{{{mmap:0x18200167000:0x3000:load:0x3:rw:0x6f000}}}
+{{{mmap:0x1820016a000:0x4000:load:0x3:rw:0x72000}}}
+dso: id=dafc3f065a1f5b25 base=0x00000182000f8000 name=libfdio.so
+{{{module:0x4:libmini-process.so:elf:3d7341f1bacf14c8}}}
+{{{mmap:0x1820016e000:0x2000:load:0x4:r:0}}}
+{{{mmap:0x18200170000:0x2000:load:0x4:rx:0x2000}}}
+{{{mmap:0x18200172000:0x1000:load:0x4:rw:0x4000}}}
+{{{mmap:0x18200173000:0x1000:load:0x4:rw:0x5000}}}
+dso: id=3d7341f1bacf14c8 base=0x000001820016e000 name=libmini-process.so
+{{{module:0x5:libinspector.so:elf:2f69b8107fa3dc4e}}}
+{{{mmap:0x18200174000:0x6000:load:0x5:r:0}}}
+{{{mmap:0x1820017a000:0x15000:load:0x5:rx:0x6000}}}
+{{{mmap:0x1820018f000:0x1000:load:0x5:rw:0x1b000}}}
+{{{mmap:0x18200190000:0xf000:load:0x5:rw:0x1c000}}}
+dso: id=2f69b8107fa3dc4e base=0x0000018200174000 name=libinspector.so
+{{{module:0x6:libtest-exceptions.so:elf:9b11c8f781a20eb7}}}
+{{{mmap:0x1820019f000:0x1000:load:0x6:r:0}}}
+{{{mmap:0x182001a0000:0x1000:load:0x6:rx:0x1000}}}
+{{{mmap:0x182001a1000:0x1000:load:0x6:rw:0x2000}}}
+dso: id=9b11c8f781a20eb7 base=0x000001820019f000 name=libtest-exceptions.so
+{{{module:0x7:libsyslog.so:elf:3064f8b7abc34a74}}}
+{{{mmap:0x182001a2000:0x4000:load:0x7:r:0}}}
+{{{mmap:0x182001a6000:0x7000:load:0x7:rx:0x4000}}}
+{{{mmap:0x182001ad000:0x1000:load:0x7:rw:0xb000}}}
+{{{mmap:0x182001ae000:0x1000:load:0x7:rw:0xc000}}}
+dso: id=3064f8b7abc34a74 base=0x00000182001a2000 name=libsyslog.so
+{{{module:0x8:libunittest.so:elf:d607ffdf9c366a5e}}}
+{{{mmap:0x182001af000:0x3000:load:0x8:r:0}}}
+{{{mmap:0x182001b2000:0x2000:load:0x8:rx:0x3000}}}
+{{{mmap:0x182001b4000:0x1000:load:0x8:rw:0x5000}}}
+{{{mmap:0x182001b5000:0x2000:load:0x8:rw:0x6000}}}
+dso: id=d607ffdf9c366a5e base=0x00000182001af000 name=libunittest.so
+{{{module:0x2:<vDSO>:elf:43ee7ebb5dc809d4}}}
+{{{mmap:0x182000af000:0x7000:load:0x2:r:0}}}
+{{{mmap:0x182000b6000:0x2000:load:0x2:rx:0x7000}}}
+dso: id=43ee7ebb5dc809d4 base=0x00000182000af000 name=<vDSO>
+{{{module:0x9:libc++.so.2:elf:f0859e1ce39d0113}}}
+{{{mmap:0x182001b7000:0x51000:load:0x9:r:0}}}
+{{{mmap:0x18200208000:0x74000:load:0x9:rx:0x51000}}}
+{{{mmap:0x1820027c000:0x6000:load:0x9:rw:0xc5000}}}
+{{{mmap:0x18200282000:0x7000:load:0x9:rw:0xcb000}}}
+dso: id=f0859e1ce39d0113 base=0x00000182001b7000 name=libc++.so.2
+{{{module:0xa:libc++abi.so.1:elf:a5f4709b440b951e}}}
+{{{mmap:0x18200289000:0x12000:load:0xa:r:0}}}
+{{{mmap:0x1820029b000:0x1c000:load:0xa:rx:0x12000}}}
+{{{mmap:0x182002b7000:0x4000:load:0xa:rw:0x2e000}}}
+{{{mmap:0x182002bb000:0x1000:load:0xa:rw:0x32000}}}
+dso: id=a5f4709b440b951e base=0x0000018200289000 name=libc++abi.so.1
+{{{module:0x1:libc.so:elf:1b1e17757ec5c736}}}
+{{{mmap:0x18200000000:0x4f000:load:0x1:r:0}}}
+{{{mmap:0x1820004f000:0x5b000:load:0x1:rx:0x4f000}}}
+{{{mmap:0x182000aa000:0x2000:load:0x1:rw:0xaa000}}}
+{{{mmap:0x182000ac000:0x3000:load:0x1:rw:0xac000}}}
+dso: id=1b1e17757ec5c736 base=0x0000018200000000 name=libc.so
+{{{module:0xb:libunwind.so.1:elf:dc66c3d80e22e1eb}}}
+{{{mmap:0x182002bc000:0x4000:load:0xb:r:0}}}
+{{{mmap:0x182002c0000:0x6000:load:0xb:rx:0x4000}}}
+{{{mmap:0x182002c6000:0x1000:load:0xb:rw:0xa000}}}
+{{{mmap:0x182002c7000:0x1000:load:0xb:rw:0xb000}}}
+dso: id=dc66c3d80e22e1eb base=0x00000182002bc000 name=libunwind.so.1
+[93m[2.474570689s  WARN 0 0:0] HACKED: test args = "test\u{0}-f\u{0}Bti.Pin\u{0}"
+[0m*** Running standalone Zircon core tests ***
+[==========] Flag Values:
+             --gtest_filter = Bti.Pin
+             --gtest_random_seed = 2
+[==========] 
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from Bti
+[ RUN      ] Bti.Pin
+[       OK ] Bti.Pin (0 ms)
+[----------] 1 test from Bti (1 ms total)
+
+[----------] Global test environment tear-down.
+[==========] 1 test from 1 test case ran (3 ms total).
+[  PASSED  ] 1 test
+qemu-system-x86_64: -device ide-drive,drive=disk,bus=ahci.0: warning: 'ide-drive' is deprecated, please use 'ide-hd' or 'ide-cd' instead
+[2J[01;01H[=3h[2J[01;01H[0m[35m[40m[0m[37m[40mBdsDxe: failed to load Boot0001 "UEFI QEMU HARDDISK QM00013 " from PciRoot(0x0)/Pci(0x2,0x0)/Sata(0x0,0xFFFF,0x0): Not Found
+BdsDxe: loading Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+BdsDxe: starting Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+INFO: bootloader is running
+INFO: opening file: \EFI\Boot\rboot.conf
+INFO: loading file to memory
+INFO: switching graphic mode
+INFO: config: Config {
+INFO:     kernel_stack_address: 0xffffff0100000000,
+INFO:     kernel_stack_size: 0x200,
+INFO:     physical_memory_offset: 0xffff800000000000,
+INFO:     kernel_path: "\\EFI\\zCore\\zcore.elf",
+INFO:     resolution: Some(
+INFO:         (
+INFO:             0x400,
+INFO:             0x300,
+INFO:         ),
+INFO:     ),
+INFO:     initramfs: Some(
+INFO:         "\\EFI\\zCore\\fuchsia.zbi",
+INFO:     ),
+INFO:     cmdline: "LOG=warn:userboot=test/core-standalone-test:userboot.shutdown:core-tests=BadAccessTest.InvalidMappedAddressFails",
+INFO: }
+INFO: acpi2: 0x7fbfa014
+INFO: smbios: 0x7fbcc000
+INFO: opening file: \EFI\zCore\zcore.elf
+INFO: loading file to memory
+INFO: opening file: \EFI\zCore\fuchsia.zbi
+INFO: loading file to memory
+INFO: mapping ELF
+INFO: mapping stack at 0xffffff0100000000
+INFO: mapping physical memory
+INFO: exit boot services
+[93m[900.179041ms  WARN 0 0:0] get_acpi_table error: RsdpIncorrectSignature
+[0muserboot: option "LOG=warn"
+userboot: option "userboot=test/core-standalone-test"
+userboot: option "userboot.shutdown"
+userboot: option "core-tests=BadAccessTest.InvalidMappedAddressFails"
+userboot: decompressed BOOTFS to VMO!
+userboot: searching bootfs for 'test/core-standalone-test'
+userboot: 'test/core-standalone-test' has PT_INTERP "lib/ld.so.1"
+userboot: searching bootfs for 'lib/ld.so.1'
+userboot: userboot: loaded lib/ld.so.1 at 0x18200000000, entry point 0x1820005772c
+userboot: userboot: loaded vDSO at 0x182000af000, entry point 0x182000b6e38
+userboot: process test/core-standalone-test started.
+userboot: waiting for loader-service requests...
+[93m[2.434594352s  WARN 0 0:0] HACKED: test args = "test\u{0}-f\u{0}BadAccessTest.InvalidMappedAddressFails\u{0}"
+[0muserboot: searching bootfs for 'lib/libfdio.so'
+userboot: searching bootfs for 'lib/libmini-process.so'
+userboot: searching bootfs for 'lib/libinspector.so'
+userboot: searching bootfs for 'lib/libtest-exceptions.so'
+userboot: searching bootfs for 'lib/libsyslog.so'
+userboot: searching bootfs for 'lib/libunittest.so'
+userboot: searching bootfs for 'lib/libc++.so.2'
+userboot: searching bootfs for 'lib/libc++abi.so.1'
+userboot: searching bootfs for 'lib/libunwind.so.1'
+{{{reset}}}
+{{{module:0:test:elf:56cc8d497fd54e13}}}
+{{{mmap:0x10200000000:0x96000:load:0:r:0}}}
+{{{mmap:0x10200096000:0x3c5000:load:0:rx:0x96000}}}
+{{{mmap:0x1020045b000:0x10000:load:0:rw:0x45b000}}}
+{{{mmap:0x1020046b000:0x1000:load:0:rw:0x46b000}}}
+dso: id=56cc8d497fd54e13 base=0x0000010200000000 name=test
+{{{module:0x3:libfdio.so:elf:dafc3f065a1f5b25}}}
+{{{mmap:0x182000f8000:0x16000:load:0x3:r:0}}}
+{{{mmap:0x1820010e000:0x59000:load:0x3:rx:0x16000}}}
+{{{mmap:0x18200167000:0x3000:load:0x3:rw:0x6f000}}}
+{{{mmap:0x1820016a000:0x4000:load:0x3:rw:0x72000}}}
+dso: id=dafc3f065a1f5b25 base=0x00000182000f8000 name=libfdio.so
+{{{module:0x4:libmini-process.so:elf:3d7341f1bacf14c8}}}
+{{{mmap:0x1820016e000:0x2000:load:0x4:r:0}}}
+{{{mmap:0x18200170000:0x2000:load:0x4:rx:0x2000}}}
+{{{mmap:0x18200172000:0x1000:load:0x4:rw:0x4000}}}
+{{{mmap:0x18200173000:0x1000:load:0x4:rw:0x5000}}}
+dso: id=3d7341f1bacf14c8 base=0x000001820016e000 name=libmini-process.so
+{{{module:0x5:libinspector.so:elf:2f69b8107fa3dc4e}}}
+{{{mmap:0x18200174000:0x6000:load:0x5:r:0}}}
+{{{mmap:0x1820017a000:0x15000:load:0x5:rx:0x6000}}}
+{{{mmap:0x1820018f000:0x1000:load:0x5:rw:0x1b000}}}
+{{{mmap:0x18200190000:0xf000:load:0x5:rw:0x1c000}}}
+dso: id=2f69b8107fa3dc4e base=0x0000018200174000 name=libinspector.so
+{{{module:0x6:libtest-exceptions.so:elf:9b11c8f781a20eb7}}}
+{{{mmap:0x1820019f000:0x1000:load:0x6:r:0}}}
+{{{mmap:0x182001a0000:0x1000:load:0x6:rx:0x1000}}}
+{{{mmap:0x182001a1000:0x1000:load:0x6:rw:0x2000}}}
+dso: id=9b11c8f781a20eb7 base=0x000001820019f000 name=libtest-exceptions.so
+{{{module:0x7:libsyslog.so:elf:3064f8b7abc34a74}}}
+{{{mmap:0x182001a2000:0x4000:load:0x7:r:0}}}
+{{{mmap:0x182001a6000:0x7000:load:0x7:rx:0x4000}}}
+{{{mmap:0x182001ad000:0x1000:load:0x7:rw:0xb000}}}
+{{{mmap:0x182001ae000:0x1000:load:0x7:rw:0xc000}}}
+dso: id=3064f8b7abc34a74 base=0x00000182001a2000 name=libsyslog.so
+{{{module:0x8:libunittest.so:elf:d607ffdf9c366a5e}}}
+{{{mmap:0x182001af000:0x3000:load:0x8:r:0}}}
+{{{mmap:0x182001b2000:0x2000:load:0x8:rx:0x3000}}}
+{{{mmap:0x182001b4000:0x1000:load:0x8:rw:0x5000}}}
+{{{mmap:0x182001b5000:0x2000:load:0x8:rw:0x6000}}}
+dso: id=d607ffdf9c366a5e base=0x00000182001af000 name=libunittest.so
+{{{module:0x2:<vDSO>:elf:43ee7ebb5dc809d4}}}
+{{{mmap:0x182000af000:0x7000:load:0x2:r:0}}}
+{{{mmap:0x182000b6000:0x2000:load:0x2:rx:0x7000}}}
+dso: id=43ee7ebb5dc809d4 base=0x00000182000af000 name=<vDSO>
+{{{module:0x9:libc++.so.2:elf:f0859e1ce39d0113}}}
+{{{mmap:0x182001b7000:0x51000:load:0x9:r:0}}}
+{{{mmap:0x18200208000:0x74000:load:0x9:rx:0x51000}}}
+{{{mmap:0x1820027c000:0x6000:load:0x9:rw:0xc5000}}}
+{{{mmap:0x18200282000:0x7000:load:0x9:rw:0xcb000}}}
+dso: id=f0859e1ce39d0113 base=0x00000182001b7000 name=libc++.so.2
+{{{module:0xa:libc++abi.so.1:elf:a5f4709b440b951e}}}
+{{{mmap:0x18200289000:0x12000:load:0xa:r:0}}}
+{{{mmap:0x1820029b000:0x1c000:load:0xa:rx:0x12000}}}
+{{{mmap:0x182002b7000:0x4000:load:0xa:rw:0x2e000}}}
+{{{mmap:0x182002bb000:0x1000:load:0xa:rw:0x32000}}}
+dso: id=a5f4709b440b951e base=0x0000018200289000 name=libc++abi.so.1
+{{{module:0x1:libc.so:elf:1b1e17757ec5c736}}}
+{{{mmap:0x18200000000:0x4f000:load:0x1:r:0}}}
+{{{mmap:0x1820004f000:0x5b000:load:0x1:rx:0x4f000}}}
+{{{mmap:0x182000aa000:0x2000:load:0x1:rw:0xaa000}}}
+{{{mmap:0x182000ac000:0x3000:load:0x1:rw:0xac000}}}
+dso: id=1b1e17757ec5c736 base=0x0000018200000000 name=libc.so
+{{{module:0xb:libunwind.so.1:elf:dc66c3d80e22e1eb}}}
+{{{mmap:0x182002bc000:0x4000:load:0xb:r:0}}}
+{{{mmap:0x182002c0000:0x6000:load:0xb:rx:0x4000}}}
+{{{mmap:0x182002c6000:0x1000:load:0xb:rw:0xa000}}}
+{{{mmap:0x182002c7000:0x1000:load:0xb:rw:0xb000}}}
+dso: id=dc66c3d80e22e1eb base=0x00000182002bc000 name=libunwind.so.1
+[93m[2.48845223s  WARN 0 0:0] HACKED: test args = "test\u{0}-f\u{0}BadAccessTest.InvalidMappedAddressFails\u{0}"
+[0m*** Running standalone Zircon core tests ***
+[==========] Flag Values:
+             --gtest_filter = BadAccessTest.InvalidMappedAddressFails
+             --gtest_random_seed = 2
+[==========] 
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from BadAccessTest
+[ RUN      ] BadAccessTest.InvalidMappedAddressFails
+[31m[2.497667797s ERROR 0 0:0] 
+
+panicked atqemu-system-x86_64: -device ide-drive,drive=disk,bus=ahci.0: warning: 'ide-drive' is deprecated, please use 'ide-hd' or 'ide-cd' instead
+[2J[01;01H[=3h[2J[01;01H[0m[35m[40m[0m[37m[40mBdsDxe: failed to load Boot0001 "UEFI QEMU HARDDISK QM00013 " from PciRoot(0x0)/Pci(0x2,0x0)/Sata(0x0,0xFFFF,0x0): Not Found
+BdsDxe: loading Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+BdsDxe: starting Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+INFO: bootloader is running
+INFO: opening file: \EFI\Boot\rboot.conf
+INFO: loading file to memory
+INFO: switching graphic mode
+INFO: config: Config {
+INFO:     kernel_stack_address: 0xffffff0100000000,
+INFO:     kernel_stack_size: 0x200,
+INFO:     physical_memory_offset: 0xffff800000000000,
+INFO:     kernel_path: "\\EFI\\zCore\\zcore.elf",
+INFO:     resolution: Some(
+INFO:         (
+INFO:             0x400,
+INFO:             0x300,
+INFO:         ),
+INFO:     ),
+INFO:     initramfs: Some(
+INFO:         "\\EFI\\zCore\\fuchsia.zbi",
+INFO:     ),
+INFO:     cmdline: "LOG=warn:userboot=test/core-standalone-test:userboot.shutdown:core-tests=ConditionalVariableTest.BroadcastSignalThreadWait",
+INFO: }
+INFO: acpi2: 0x7fbfa014
+INFO: smbios: 0x7fbcc000
+INFO: opening file: \EFI\zCore\zcore.elf
+INFO: loading file to memory
+INFO: opening file: \EFI\zCore\fuchsia.zbi
+INFO: loading file to memory
+INFO: mapping ELF
+INFO: mapping stack at 0xffffff0100000000
+INFO: mapping physical memory
+INFO: exit boot services
+[93m[889.490421ms  WARN 0 0:0] get_acpi_table error: RsdpIncorrectSignature
+[0muserboot: option "LOG=warn"
+userboot: option "userboot=test/core-standalone-test"
+userboot: option "userboot.shutdown"
+userboot: option "core-tests=ConditionalVariableTest.BroadcastSignalThreadWait"
+userboot: decompressed BOOTFS to VMO!
+userboot: searching bootfs for 'test/core-standalone-test'
+userboot: 'test/core-standalone-test' has PT_INTERP "lib/ld.so.1"
+userboot: searching bootfs for 'lib/ld.so.1'
+userboot: userboot: loaded lib/ld.so.1 at 0x18200000000, entry point 0x1820005772c
+userboot: userboot: loaded vDSO at 0x182000af000, entry point 0x182000b6e38
+userboot: process test/core-standalone-test started.
+[93m[2.424343666s  WARN 0 0:0] HACKED: test args = "test\u{0}-f\u{0}ConditionalVariableTest.BroadcastSignalThreadWait\u{0}"
+[0muserboot: waiting for loader-service requests...
+userboot: searching bootfs for 'lib/libfdio.so'
+userboot: searching bootfs for 'lib/libmini-process.so'
+userboot: searching bootfs for 'lib/libinspector.so'
+userboot: searching bootfs for 'lib/libtest-exceptions.so'
+userboot: searching bootfs for 'lib/libsyslog.so'
+userboot: searching bootfs for 'lib/libunittest.so'
+userboot: searching bootfs for 'lib/libc++.so.2'
+userboot: searching bootfs for 'lib/libc++abi.so.1'
+userboot: searching bootfs for 'lib/libunwind.so.1'
+{{{reset}}}
+{{{module:0:test:elf:56cc8d497fd54e13}}}
+{{{mmap:0x10200000000:0x96000:load:0:r:0}}}
+{{{mmap:0x10200096000:0x3c5000:load:0:rx:0x96000}}}
+{{{mmap:0x1020045b000:0x10000:load:0:rw:0x45b000}}}
+{{{mmap:0x1020046b000:0x1000:load:0:rw:0x46b000}}}
+dso: id=56cc8d497fd54e13 base=0x0000010200000000 name=test
+{{{module:0x3:libfdio.so:elf:dafc3f065a1f5b25}}}
+{{{mmap:0x182000f8000:0x16000:load:0x3:r:0}}}
+{{{mmap:0x1820010e000:0x59000:load:0x3:rx:0x16000}}}
+{{{mmap:0x18200167000:0x3000:load:0x3:rw:0x6f000}}}
+{{{mmap:0x1820016a000:0x4000:load:0x3:rw:0x72000}}}
+dso: id=dafc3f065a1f5b25 base=0x00000182000f8000 name=libfdio.so
+{{{module:0x4:libmini-process.so:elf:3d7341f1bacf14c8}}}
+{{{mmap:0x1820016e000:0x2000:load:0x4:r:0}}}
+{{{mmap:0x18200170000:0x2000:load:0x4:rx:0x2000}}}
+{{{mmap:0x18200172000:0x1000:load:0x4:rw:0x4000}}}
+{{{mmap:0x18200173000:0x1000:load:0x4:rw:0x5000}}}
+dso: id=3d7341f1bacf14c8 base=0x000001820016e000 name=libmini-process.so
+{{{module:0x5:libinspector.so:elf:2f69b8107fa3dc4e}}}
+{{{mmap:0x18200174000:0x6000:load:0x5:r:0}}}
+{{{mmap:0x1820017a000:0x15000:load:0x5:rx:0x6000}}}
+{{{mmap:0x1820018f000:0x1000:load:0x5:rw:0x1b000}}}
+{{{mmap:0x18200190000:0xf000:load:0x5:rw:0x1c000}}}
+dso: id=2f69b8107fa3dc4e base=0x0000018200174000 name=libinspector.so
+{{{module:0x6:libtest-exceptions.so:elf:9b11c8f781a20eb7}}}
+{{{mmap:0x1820019f000:0x1000:load:0x6:r:0}}}
+{{{mmap:0x182001a0000:0x1000:load:0x6:rx:0x1000}}}
+{{{mmap:0x182001a1000:0x1000:load:0x6:rw:0x2000}}}
+dso: id=9b11c8f781a20eb7 base=0x000001820019f000 name=libtest-exceptions.so
+{{{module:0x7:libsyslog.so:elf:3064f8b7abc34a74}}}
+{{{mmap:0x182001a2000:0x4000:load:0x7:r:0}}}
+{{{mmap:0x182001a6000:0x7000:load:0x7:rx:0x4000}}}
+{{{mmap:0x182001ad000:0x1000:load:0x7:rw:0xb000}}}
+{{{mmap:0x182001ae000:0x1000:load:0x7:rw:0xc000}}}
+dso: id=3064f8b7abc34a74 base=0x00000182001a2000 name=libsyslog.so
+{{{module:0x8:libunittest.so:elf:d607ffdf9c366a5e}}}
+{{{mmap:0x182001af000:0x3000:load:0x8:r:0}}}
+{{{mmap:0x182001b2000:0x2000:load:0x8:rx:0x3000}}}
+{{{mmap:0x182001b4000:0x1000:load:0x8:rw:0x5000}}}
+{{{mmap:0x182001b5000:0x2000:load:0x8:rw:0x6000}}}
+dso: id=d607ffdf9c366a5e base=0x00000182001af000 name=libunittest.so
+{{{module:0x2:<vDSO>:elf:43ee7ebb5dc809d4}}}
+{{{mmap:0x182000af000:0x7000:load:0x2:r:0}}}
+{{{mmap:0x182000b6000:0x2000:load:0x2:rx:0x7000}}}
+dso: id=43ee7ebb5dc809d4 base=0x00000182000af000 name=<vDSO>
+{{{module:0x9:libc++.so.2:elf:f0859e1ce39d0113}}}
+{{{mmap:0x182001b7000:0x51000:load:0x9:r:0}}}
+{{{mmap:0x18200208000:0x74000:load:0x9:rx:0x51000}}}
+{{{mmap:0x1820027c000:0x6000:load:0x9:rw:0xc5000}}}
+{{{mmap:0x18200282000:0x7000:load:0x9:rw:0xcb000}}}
+dso: id=f0859e1ce39d0113 base=0x00000182001b7000 name=libc++.so.2
+{{{module:0xa:libc++abi.so.1:elf:a5f4709b440b951e}}}
+{{{mmap:0x18200289000:0x12000:load:0xa:r:0}}}
+{{{mmap:0x1820029b000:0x1c000:load:0xa:rx:0x12000}}}
+{{{mmap:0x182002b7000:0x4000:load:0xa:rw:0x2e000}}}
+{{{mmap:0x182002bb000:0x1000:load:0xa:rw:0x32000}}}
+dso: id=a5f4709b440b951e base=0x0000018200289000 name=libc++abi.so.1
+{{{module:0x1:libc.so:elf:1b1e17757ec5c736}}}
+{{{mmap:0x18200000000:0x4f000:load:0x1:r:0}}}
+{{{mmap:0x1820004f000:0x5b000:load:0x1:rx:0x4f000}}}
+{{{mmap:0x182000aa000:0x2000:load:0x1:rw:0xaa000}}}
+{{{mmap:0x182000ac000:0x3000:load:0x1:rw:0xac000}}}
+dso: id=1b1e17757ec5c736 base=0x0000018200000000 name=libc.so
+{{{module:0xb:libunwind.so.1:elf:dc66c3d80e22e1eb}}}
+{{{mmap:0x182002bc000:0x4000:load:0xb:r:0}}}
+{{{mmap:0x182002c0000:0x6000:load:0xb:rx:0x4000}}}
+{{{mmap:0x182002c6000:0x1000:load:0xb:rw:0xa000}}}
+{{{mmap:0x182002c7000:0x1000:load:0xb:rw:0xb000}}}
+dso: id=dc66c3d80e22e1eb base=0x00000182002bc000 name=libunwind.so.1
+[93m[2.479796423s  WARN 0 0:0] HACKED: test args = "test\u{0}-f\u{0}ConditionalVariableTest.BroadcastSignalThreadWait\u{0}"
+[0m*** Running standalone Zircon core tests ***
+[==========] Flag Values:
+             --gtest_filter = ConditionalVariableTest.BroadcastSignalThreadWait
+             --gtest_random_seed = 2
+[==========] 
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from ConditionalVariableTest
+[ RUN      ] ConditionalVariableTest.BroadcastSignalThreadWait
+[       OK ] ConditionalVariableTest.BroadcastSignalThreadWait (1 ms)
+[----------] 1 test from ConditionalVariableTest (2 ms total)
+
+[----------] Global test environment tear-down.
+[==========] 1 test from 1 test case ran (5 ms total).
+[  PASSED  ] 1 test
+qemu-system-x86_64: -device ide-drive,drive=disk,bus=ahci.0: warning: 'ide-drive' is deprecated, please use 'ide-hd' or 'ide-cd' instead
+[2J[01;01H[=3h[2J[01;01H[0m[35m[40m[0m[37m[40mBdsDxe: failed to load Boot0001 "UEFI QEMU HARDDISK QM00013 " from PciRoot(0x0)/Pci(0x2,0x0)/Sata(0x0,0xFFFF,0x0): Not Found
+BdsDxe: loading Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+BdsDxe: starting Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+INFO: bootloader is running
+INFO: opening file: \EFI\Boot\rboot.conf
+INFO: loading file to memory
+INFO: switching graphic mode
+INFO: config: Config {
+INFO:     kernel_stack_address: 0xffffff0100000000,
+INFO:     kernel_stack_size: 0x200,
+INFO:     physical_memory_offset: 0xffff800000000000,
+INFO:     kernel_path: "\\EFI\\zCore\\zcore.elf",
+INFO:     resolution: Some(
+INFO:         (
+INFO:             0x400,
+INFO:             0x300,
+INFO:         ),
+INFO:     ),
+INFO:     initramfs: Some(
+INFO:         "\\EFI\\zCore\\fuchsia.zbi",
+INFO:     ),
+INFO:     cmdline: "LOG=warn:userboot=test/core-standalone-test:userboot.shutdown:core-tests=ConditionalVariableTest.SignalThreadWait",
+INFO: }
+INFO: acpi2: 0x7fbfa014
+INFO: smbios: 0x7fbcc000
+INFO: opening file: \EFI\zCore\zcore.elf
+INFO: loading file to memory
+INFO: opening file: \EFI\zCore\fuchsia.zbi
+INFO: loading file to memory
+INFO: mapping ELF
+INFO: mapping stack at 0xffffff0100000000
+INFO: mapping physical memory
+INFO: exit boot services
+[93m[881.691441ms  WARN 0 0:0] get_acpi_table error: RsdpIncorrectSignature
+[0muserboot: option "LOG=warn"
+userboot: option "userboot=test/core-standalone-test"
+userboot: option "userboot.shutdown"
+userboot: option "core-tests=ConditionalVariableTest.SignalThreadWait"
+userboot: decompressed BOOTFS to VMO!
+userboot: searching bootfs for 'test/core-standalone-test'
+userboot: 'test/core-standalone-test' has PT_INTERP "lib/ld.so.1"
+userboot: searching bootfs for 'lib/ld.so.1'
+userboot: userboot: loaded lib/ld.so.1 at 0x18200000000, entry point 0x1820005772c
+userboot: userboot: loaded vDSO at 0x182000af000, entry point 0x182000b6e38
+userboot: process test/core-standalone-test started.
+userboot: waiting for loader-service requests...
+[93m[2.41854838s  WARN 0 0:0] HACKED: test args = "test\u{0}-f\u{0}ConditionalVariableTest.SignalThreadWait\u{0}"
+[0muserboot: searching bootfs for 'lib/libfdio.so'
+userboot: searching bootfs for 'lib/libmini-process.so'
+userboot: searching bootfs for 'lib/libinspector.so'
+userboot: searching bootfs for 'lib/libtest-exceptions.so'
+userboot: searching bootfs for 'lib/libsyslog.so'
+userboot: searching bootfs for 'lib/libunittest.so'
+userboot: searching bootfs for 'lib/libc++.so.2'
+userboot: searching bootfs for 'lib/libc++abi.so.1'
+userboot: searching bootfs for 'lib/libunwind.so.1'
+{{{reset}}}
+{{{module:0:test:elf:56cc8d497fd54e13}}}
+{{{mmap:0x10200000000:0x96000:load:0:r:0}}}
+{{{mmap:0x10200096000:0x3c5000:load:0:rx:0x96000}}}
+{{{mmap:0x1020045b000:0x10000:load:0:rw:0x45b000}}}
+{{{mmap:0x1020046b000:0x1000:load:0:rw:0x46b000}}}
+dso: id=56cc8d497fd54e13 base=0x0000010200000000 name=test
+{{{module:0x3:libfdio.so:elf:dafc3f065a1f5b25}}}
+{{{mmap:0x182000f8000:0x16000:load:0x3:r:0}}}
+{{{mmap:0x1820010e000:0x59000:load:0x3:rx:0x16000}}}
+{{{mmap:0x18200167000:0x3000:load:0x3:rw:0x6f000}}}
+{{{mmap:0x1820016a000:0x4000:load:0x3:rw:0x72000}}}
+dso: id=dafc3f065a1f5b25 base=0x00000182000f8000 name=libfdio.so
+{{{module:0x4:libmini-process.so:elf:3d7341f1bacf14c8}}}
+{{{mmap:0x1820016e000:0x2000:load:0x4:r:0}}}
+{{{mmap:0x18200170000:0x2000:load:0x4:rx:0x2000}}}
+{{{mmap:0x18200172000:0x1000:load:0x4:rw:0x4000}}}
+{{{mmap:0x18200173000:0x1000:load:0x4:rw:0x5000}}}
+dso: id=3d7341f1bacf14c8 base=0x000001820016e000 name=libmini-process.so
+{{{module:0x5:libinspector.so:elf:2f69b8107fa3dc4e}}}
+{{{mmap:0x18200174000:0x6000:load:0x5:r:0}}}
+{{{mmap:0x1820017a000:0x15000:load:0x5:rx:0x6000}}}
+{{{mmap:0x1820018f000:0x1000:load:0x5:rw:0x1b000}}}
+{{{mmap:0x18200190000:0xf000:load:0x5:rw:0x1c000}}}
+dso: id=2f69b8107fa3dc4e base=0x0000018200174000 name=libinspector.so
+{{{module:0x6:libtest-exceptions.so:elf:9b11c8f781a20eb7}}}
+{{{mmap:0x1820019f000:0x1000:load:0x6:r:0}}}
+{{{mmap:0x182001a0000:0x1000:load:0x6:rx:0x1000}}}
+{{{mmap:0x182001a1000:0x1000:load:0x6:rw:0x2000}}}
+dso: id=9b11c8f781a20eb7 base=0x000001820019f000 name=libtest-exceptions.so
+{{{module:0x7:libsyslog.so:elf:3064f8b7abc34a74}}}
+{{{mmap:0x182001a2000:0x4000:load:0x7:r:0}}}
+{{{mmap:0x182001a6000:0x7000:load:0x7:rx:0x4000}}}
+{{{mmap:0x182001ad000:0x1000:load:0x7:rw:0xb000}}}
+{{{mmap:0x182001ae000:0x1000:load:0x7:rw:0xc000}}}
+dso: id=3064f8b7abc34a74 base=0x00000182001a2000 name=libsyslog.so
+{{{module:0x8:libunittest.so:elf:d607ffdf9c366a5e}}}
+{{{mmap:0x182001af000:0x3000:load:0x8:r:0}}}
+{{{mmap:0x182001b2000:0x2000:load:0x8:rx:0x3000}}}
+{{{mmap:0x182001b4000:0x1000:load:0x8:rw:0x5000}}}
+{{{mmap:0x182001b5000:0x2000:load:0x8:rw:0x6000}}}
+dso: id=d607ffdf9c366a5e base=0x00000182001af000 name=libunittest.so
+{{{module:0x2:<vDSO>:elf:43ee7ebb5dc809d4}}}
+{{{mmap:0x182000af000:0x7000:load:0x2:r:0}}}
+{{{mmap:0x182000b6000:0x2000:load:0x2:rx:0x7000}}}
+dso: id=43ee7ebb5dc809d4 base=0x00000182000af000 name=<vDSO>
+{{{module:0x9:libc++.so.2:elf:f0859e1ce39d0113}}}
+{{{mmap:0x182001b7000:0x51000:load:0x9:r:0}}}
+{{{mmap:0x18200208000:0x74000:load:0x9:rx:0x51000}}}
+{{{mmap:0x1820027c000:0x6000:load:0x9:rw:0xc5000}}}
+{{{mmap:0x18200282000:0x7000:load:0x9:rw:0xcb000}}}
+dso: id=f0859e1ce39d0113 base=0x00000182001b7000 name=libc++.so.2
+{{{module:0xa:libc++abi.so.1:elf:a5f4709b440b951e}}}
+{{{mmap:0x18200289000:0x12000:load:0xa:r:0}}}
+{{{mmap:0x1820029b000:0x1c000:load:0xa:rx:0x12000}}}
+{{{mmap:0x182002b7000:0x4000:load:0xa:rw:0x2e000}}}
+{{{mmap:0x182002bb000:0x1000:load:0xa:rw:0x32000}}}
+dso: id=a5f4709b440b951e base=0x0000018200289000 name=libc++abi.so.1
+{{{module:0x1:libc.so:elf:1b1e17757ec5c736}}}
+{{{mmap:0x18200000000:0x4f000:load:0x1:r:0}}}
+{{{mmap:0x1820004f000:0x5b000:load:0x1:rx:0x4f000}}}
+{{{mmap:0x182000aa000:0x2000:load:0x1:rw:0xaa000}}}
+{{{mmap:0x182000ac000:0x3000:load:0x1:rw:0xac000}}}
+dso: id=1b1e17757ec5c736 base=0x0000018200000000 name=libc.so
+{{{module:0xb:libunwind.so.1:elf:dc66c3d80e22e1eb}}}
+{{{mmap:0x182002bc000:0x4000:load:0xb:r:0}}}
+{{{mmap:0x182002c0000:0x6000:load:0xb:rx:0x4000}}}
+{{{mmap:0x182002c6000:0x1000:load:0xb:rw:0xa000}}}
+{{{mmap:0x182002c7000:0x1000:load:0xb:rw:0xb000}}}
+dso: id=dc66c3d80e22e1eb base=0x00000182002bc000 name=libunwind.so.1
+[93m[2.475286495s  WARN 0 0:0] HACKED: test args = "test\u{0}-f\u{0}ConditionalVariableTest.SignalThreadWait\u{0}"
+[0m*** Running standalone Zircon core tests ***
+[==========] Flag Values:
+             --gtest_filter = ConditionalVariableTest.SignalThreadWait
+             --gtest_random_seed = 2
+[==========] 
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from ConditionalVariableTest
+[ RUN      ] ConditionalVariableTest.SignalThreadWait
+[       OK ] ConditionalVariableTest.SignalThreadWait (1 ms)
+[----------] 1 test from ConditionalVariableTest (3 ms total)
+
+[----------] Global test environment tear-down.
+[==========] 1 test from 1 test case ran (6 ms total).
+[  PASSED  qemu-system-x86_64: -device ide-drive,drive=disk,bus=ahci.0: warning: 'ide-drive' is deprecated, please use 'ide-hd' or 'ide-cd' instead
+[2J[01;01H[=3h[2J[01;01H[0m[35m[40m[0m[37m[40mBdsDxe: failed to load Boot0001 "UEFI QEMU HARDDISK QM00013 " from PciRoot(0x0)/Pci(0x2,0x0)/Sata(0x0,0xFFFF,0x0): Not Found
+BdsDxe: loading Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+BdsDxe: starting Boot0002 "UEFI QEMU HARDDISK QM00001 " from PciRoot(0x0)/Pci(0x1F,0x2)/Sata(0x0,0xFFFF,0x0)
+INFO: bootloader is running
+INFO: opening file: \EFI\Boot\rboot.conf
+INFO: loading file to memory
+INFO: switching graphic mode
+INFO: config: Config {
+INFO:     kernel_stack_address: 0xffffff0100000000,
+INFO:     kernel_stack_size: 0x200,
+INFO:     physical_memory_offset: 0xffff800000000000,
+INFO:     kernel_path: "\\EFI\\zCore\\zcore.elf",
+INFO:     resolution: Some(
+INFO:         (
+INFO:             0x400,
+INFO:             0x300,
+INFO:         ),
+INFO:     ),
+INFO:     initramfs: Some(
+INFO:         "\\EFI\\zCore\\fuchsia.zbi",
+INFO:     ),
+INFO:     cmdline: "LOG=warn:userboot=test/core-standalone-test:userboot.shutdown:core-tests=ConditionalVariableTest.ConditionalVariablesTimeout",
+INFO: }
+INFO: acpi2: 0x7fbfa014
+INFO: smbios: 0x7fbcc000
+INFO: opening file: \EFI\zCore\zcore.elf
+INFO: loading file to memory
+INFO: opening file: \EFI\zCore\fuchsia.zbi
+INFO: loading file to memory
+INFO: mapping ELF
+INFO: mapping stack at 0xffffff0100000000
+INFO: mapping physical memory
+INFO: exit boot services
+[93m[885.768362ms  WARN 0 0:0] get_acpi_table error: RsdpIncorrectSignature
+[0muserboot: option "LOG=warn"
+userboot: option "userboot=test/core-standalone-test"
+userboot: option "userboot.shutdown"
+userboot: option "core-tests=ConditionalVariableTest.ConditionalVariablesTimeout"
+userboot: decompressed BOOTFS to VMO!
+userboot: searching bootfs for 'test/core-standalone-test'
+userboot: 'test/core-standalone-test' has PT_INTERP "lib/ld.so.1"
+userboot: searching bootfs for 'lib/ld.so.1'
+userboot: userboot: loaded lib/ld.so.1 at 0x18200000000, entry point 0x1820005772c
+userboot: userboot: loaded vDSO at 0x182000af000, entry point 0x182000b6e38
+userboot: process test/core-standalone-test started.
+userboot: waiting for loader-service requests...
+[93m[2.420719866s  WARN 0 0:0] HACKED: test args = "test\u{0}-f\u{0}ConditionalVariableTest.ConditionalVariablesTimeout\u{0}"
+[0muserboot: searching bootfs for 'lib/libfdio.so'
+userboot: searching bootfs for 'lib/libmini-process.so'
+userboot: searching bootfs for 'lib/libinspector.so'
+userboot: searching bootfs for 'lib/libtest-exceptions.so'
+userboot: searching bootfs for 'lib/libsyslog.so'
+userboot: searching bootfs for 'lib/libunittest.so'
+userboot: searching bootfs for 'lib/libc++.so.2'
+userboot: searching bootfs for 'lib/libc++abi.so.1'
+userboot: searching bootfs for 'lib/libunwind.so.1'
+{{{reset}}}
+{{{module:0:test:elf:56cc8d497fd54e13}}}
+{{{mmap:0x10200000000:0x96000:load:0:r:0}}}
+{{{mmap:0x10200096000:0x3c5000:load:0:rx:0x96000}}}
+{{{mmap:0x1020045b000:0x10000:load:0:rw:0x45b000}}}
+{{{mmap:0x1020046b000:0x1000:load:0:rw:0x46b000}}}
+dso: id=56cc8d497fd54e13 base=0x0000010200000000 name=test
+{{{module:0x3:libfdio.so:elf:dafc3f065a1f5b25}}}
+{{{mmap:0x182000f8000:0x16000:load:0x3:r:0}}}
+{{{mmap:0x1820010e000:0x59000:load:0x3:rx:0x16000}}}
+{{{mmap:0x18200167000:0x3000:load:0x3:rw:0x6f000}}}
+{{{mmap:0x1820016a000:0x4000:load:0x3:rw:0x72000}}}
+dso: id=dafc3f065a1f5b25 base=0x00000182000f8000 name=libfdio.so
+{{{module:0x4:libmini-process.so:elf:3d7341f1bacf14c8}}}
+{{{mmap:0x1820016e000:0x2000:load:0x4:r:0}}}
+{{{mmap:0x18200170000:0x2000:load:0x4:rx:0x2000}}}
+{{{mmap:0x18200172000:0x1000:load:0x4:rw:0x4000}}}
+{{{mmap:0x18200173000:0x1000:load:0x4:rw:0x5000}}}
+dso: id=3d7341f1bacf14c8 base=0x000001820016e000 name=libmini-process.so
+{{{module:0x5:libinspector.so:elf:2f69b8107fa3dc4e}}}
+{{{mmap:0x18200174000:0x6000:load:0x5:r:0}}}
+{{{mmap:0x1820017a000:0x15000:load:0x5:rx:0x6000}}}
+{{{mmap:0x1820018f000:0x1000:load:0x5:rw:0x1b000}}}
+{{{mmap:0x18200190000:0xf000:load:0x5:rw:0x1c000}}}
+dso: id=2f69b8107fa3dc4e base=0x0000018200174000 name=libinspector.so
+{{{module:0x6:libtest-exceptions.so:elf:9b11c8f781a20eb7}}}
+{{{mmap:0x1820019f000:0x1000:load:0x6:r:0}}}
+{{{mmap:0x182001a0000:0x1000:load:0x6:rx:0x1000}}}
+{{{mmap:0x182001a1000:0x1000:load:0x6:rw:0x2000}}}
+dso: id=9b11c8f781a20eb7 base=0x000001820019f000 name=libtest-exceptions.so
+{{{module:0x7:libsyslog.so:elf:3064f8b7abc34a74}}}
+{{{mmap:0x182001a2000:0x4000:load:0x7:r:0}}}
+{{{mmap:0x182001a6000:0x7000:load:0x7:rx:0x4000}}}
+{{{mmap:0x182001ad000:0x1000:load:0x7:rw:0xb000}}}
+{{{mmap:0x182001ae000:0x1000:load:0x7:rw:0xc000}}}
+dso: id=3064f8b7abc34a74 base=0x00000182001a2000 name=libsyslog.so
+{{{module:0x8:libunittest.so:elf:d607ffdf9c366a5e}}}
+{{{mmap:0x182001af000:0x3000:load:0x8:r:0}}}
+{{{mmap:0x182001b2000:0x2000:load:0x8:rx:0x3000}}}
+{{{mmap:0x182001b4000:0x1000:load:0x8:rw:0x5000}}}
+{{{mmap:0x182001b5000:0x2000:load:0x8:rw:0x6000}}}
+dso: id=d607ffdf9c366a5e base=0x00000182001af000 name=libunittest.so
+{{{module:0x2:<vDSO>:elf:43ee7ebb5dc809d4}}}
+{{{mmap:0x182000af000:0x7000:load:0x2:r:0}}}
+{{{mmap:0x182000b6000:0x2000:load:0x2:rx:0x7000}}}
+dso: id=43ee7ebb5dc809d4 base=0x00000182000af000 name=<vDSO>
+{{{module:0x9:libc++.so.2:elf:f0859e1ce39d0113}}}
+{{{mmap:0x182001b7000:0x51000:load:0x9:r:0}}}
+{{{mmap:0x18200208000:0x74000:load:0x9:rx:0x51000}}}
+{{{mmap:0x1820027c000:0x6000:load:0x9:rw:0xc5000}}}
+{{{mmap:0x18200282000:0x7000:load:0x9:rw:0xcb000}}}
+dso: id=f0859e1ce39d0113 base=0x00000182001b7000 name=libc++.so.2
+{{{module:0xa:libc++abi.so.1:elf:a5f4709b440b951e}}}
+{{{mmap:0x18200289000:0x12000:load:0xa:r:0}}}
+{{{mmap:0x1820029b000:0x1c000:load:0xa:rx:0x12000}}}
+{{{mmap:0x182002b7000:0x4000:load:0xa:rw:0x2e000}}}
+{{{mmap:0x182002bb000:0x1000:load:0xa:rw:0x32000}}}
+dso: id=a5f4709b440b951e base=0x0000018200289000 name=libc++abi.so.1
+{{{module:0x1:libc.so:elf:1b1e17757ec5c736}}}
+{{{mmap:0x18200000000:0x4f000:load:0x1:r:0}}}
+{{{mmap:0x1820004f000:0x5b000:load:0x1:rx:0x4f000}}}
+{{{mmap:0x182000aa000:0x2000:load:0x1:rw:0xaa000}}}
+{{{mmap:0x182000ac000:0x3000:load:0x1:rw:0xac000}}}
+dso: id=1b1e17757ec5c736 base=0x0000018200000000 name=libc.so
+{{{module:0xb:libunwind.so.1:elf:dc66c3d80e22e1eb}}}
+{{{mmap:0x182002bc000:0x4000:load:0xb:r:0}}}
+{{{mmap:0x182002c0000:0x6000:load:0xb:rx:0x4000}}}
+{{{mmap:0x182002c6000:0x1000:load:0xb:rw:0xa000}}}
+{{{mmap:0x182002c7000:0x1000:load:0xb:rw:0xb000}}}
+dso: id=dc66c3d80e22e1eb base=0x00000182002bc000 name=libunwind.so.1
+[93m[2.477898145s  WARN 0 0:0] HACKED: test args = "test\u{0}-f\u{0}ConditionalVariableTest.ConditionalVariablesTimeout\u{0}"
+[0m*** Running standalone Zircon core tests ***
+[==========] Flag Values:
+             --gtest_filter = ConditionalVariableTest.ConditionalVariablesTimeout
+             --gtest_random_seed = 2
+[==========] 
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from ConditionalVariableTest
+[ RUN      ] ConditionalVariableTest.ConditionalVariablesTimeout
+[       OK ] ConditionalVariableTest.ConditionalVariablesTimeout (6 ms)
+[----------] 1 test from ConditionalVariableTest (8 ms total)
+
+[----------] Global test environment tear-down.
+[==========] 1 test from 1 test case ran (11 ms total).
+[  PASSED  ] 1 te
