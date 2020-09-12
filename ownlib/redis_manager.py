@@ -105,7 +105,7 @@ class RedisManager:
         repo_list = self.redis.keys("*:wait_to_test")
         need_test_dict = {}
         if len(repo_list) == 0:
-            print("没有需要更测试的")
+            print("没有需要更新的")
             return need_test_dict
         for repo in repo_list:
             branches = self.redis.smembers(repo)

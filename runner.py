@@ -127,39 +127,38 @@ def running():
     # temp
     wait_for_test = take_need_test_branch()
 
-    with open("./config/test_spec.yaml", "r") as f:
-        d = f.read()
-        print(d)
-        test_config = yaml.load(d, Loader=Loader)
+    if len(wait_for_test) != 0:
+        with open("./config/test_spec.yaml", "r") as f:
+            d = f.read()
+            # print(d)
+            test_config = yaml.load(d, Loader=Loader)
 
-    for r in wait_for_test.keys():
-        redisManager.start_running(r)
-        repo_name = r.split(":")[1]
+        for r in wait_for_test.keys():
+            redisManager.start_running(r)
+            repo_name = r.split(":")[1]
 
-        print("待测试")
-        print(r, ":", wait_for_test[r])
-        for b in wait_for_test[r]:
-            try:
-                fns = test_config.get(repo_name).get(b)
-            except:
-                fns = None
-            # 进入 仓库 进入 分支 执行 测试
-            if fns != None:
-                print("指定 测试 ")
-                for i in fns:
-                    print(i)
-                    if i == "core_test":
-                        print("运行 coretest")
-                        run_core_test(r, b)
-                    elif i == "libc_test":
-                        print("运行 libctest")
-                        run_libc_test(r, b)
-            else:
-                # run_core_test(r, b)
-                # run_libc_test(r, b)
-                print(repo_name,":",b,"无指定 测试")
-
-            
+            print("待测试")
+            print(r, ":", wait_for_test[r])
+            for b in wait_for_test[r]:
+                try:
+                    fns = test_config.get(repo_name).get(b)
+                except:
+                    fns = None
+                # 进入 仓库 进入 分支 执行 测试
+                if fns != None:
+                    print("指定 测试 ")
+                    for i in fns:
+                        print(i)
+                        if i == "core_test":
+                            print("运行 coretest")
+                            run_core_test(r, b)
+                        elif i == "libc_test":
+                            print("运行 libctest")
+                            run_libc_test(r, b)
+                else:
+                    # run_core_test(r, b)
+                    # run_libc_test(r, b)
+                    print(repo_name,":",b,"无指定 测试")
         redisManager.finish_running(r)
         print("运行 完毕 清除 redis")
 

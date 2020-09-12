@@ -1,6 +1,6 @@
 import re
 
-BASE = "/home/own/work/MengXia"
+BASE = "/home/own/MengXia"
 OUTPUT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/" + "config/" + "output.txt"
 STATISTIC_BAD_FILE = BASE + "/warehouse/" + "zCore" + "_realm/" + "config/" + "test-statistic-bad.txt"
 STATISTIC_GOOD_FILE = BASE + "/warehouse/" + "zCore" + "_realm/" + "config/" + "test-statistic-good.txt"

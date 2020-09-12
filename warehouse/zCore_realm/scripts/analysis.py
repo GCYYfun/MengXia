@@ -16,7 +16,7 @@ TEMP_DIFF = ""
 
 user = sys.argv[1]
 branch = sys.argv[2]
-BASE = "/home/own/work/MengXia"
+BASE = "/home/own/MengXia"
 OUTPUT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/logfile/" + branch + "/output.txt"
 RESULT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/result/" + branch +  "/test-result.txt"
 LAST_RESULT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/result/" + branch +  "/test-result-last.txt"
