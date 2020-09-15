@@ -39,11 +39,21 @@
 
 需要 git git-lfs
 
+```
+sudo apt install git
+sudo apt install git-lfs
+git lfs install
+```
+
 需要 rust 
+
+```
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
 
 需要 redis
 ```
-sudo apt-get install redis-server
+sudo apt install redis-server
 ```
 python3 lib
 
@@ -67,17 +77,30 @@ git clone https://github.com/GCYYfun/MengXia
 cd MengXia
 
 python3 watcher.py (temp)
+python3 runner.py (temp)
 
 ```
 
 开箱即用 一键运行
+
+## 加入 Mail List 
+
+收 垃圾 邮件 请 加入 mail list
+
+http://163.fm/OLAYBlDE
+
+## 邮箱 信息
+
+zcore_devinfo@163.com
+
+zcore123
 
 ## 说明
 
 * 我们把项目的根目录简称 根目录
 
 1. 在根目录 下 config 文件 配置 了 仓库需要观测 仓库的列表 repo_list.yaml 、在其中添加 仓库 地址
-1. 已经clone的仓库 放在 already_clone.yaml 文件里、 自动添加、
+<!-- 1. 已经clone的仓库 放在 already_clone.yaml 文件里、 自动添加、 -->
 1. 根目录 的 warehouse 是 各种仓库聚集地、
 
 
@@ -94,9 +117,9 @@ watcher 模块 已完成
 |------------|--------|
 | watcher    | ok     |
 | runner     | ok     |
-| analysis   |        |
-| statistics |        |
-| feedback   |        |
+| analysis   | ok     |
+| statistics | ok     |
+| feedback   | ok     |
 
 
 ## 模块流程图 （draft）

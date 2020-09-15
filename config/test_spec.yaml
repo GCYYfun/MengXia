@@ -2,3 +2,6 @@ zCore:
   master:
     # - libc_test
     - core_test
+  GCYYfun:
+    # - libc_test
+    - core_test
