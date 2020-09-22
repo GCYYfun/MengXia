@@ -39,29 +39,11 @@
 
 需要 git git-lfs
 
-<<<<<<< HEAD
 需要 redis
 ```
 sudo apt install redis-server
 
 (redis client 可以选择 Redis Desktop Manager)
-=======
-```
-sudo apt install git
-sudo apt install git-lfs
-git lfs install
-```
-
-需要 rust 
-
-```
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-```
-
-需要 redis
-```
-sudo apt install redis-server
->>>>>>> 4c01c457ee8ad3fd92f1cb41acf8483513bb9e5e
 ```
 python3 lib
 
