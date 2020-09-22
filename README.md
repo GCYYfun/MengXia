@@ -39,11 +39,11 @@
 
 需要 git git-lfs
 
-需要 rust 
-
 需要 redis
 ```
-sudo apt-get install redis-server
+sudo apt install redis-server
+
+(redis client 可以选择 Redis Desktop Manager)
 ```
 python3 lib
 
@@ -52,6 +52,22 @@ pip3 install requests
 pip3 install schedule
 pip3 install PyYAML
 pip3 install redis
+```
+
+### 运行 zcore 所需要的 配置
+
+需要 rust 
+
+需要 musl
+
+```
+sudo apt install musl-tools musl-dev
+```
+
+可选 kvm
+
+```
+sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils
 ```
 
 ## 获取
