@@ -1,6 +1,6 @@
 import re
 
-BASE = "/home/own/work/MengXia"
+BASE = "/home/own/MengXia"
 OUTPUT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/" + "config/" + "output.txt"
 STATISTIC_BAD_FILE = BASE + "/warehouse/" + "zCore" + "_realm/" + "config/" + "test-statistic-bad.txt"
 STATISTIC_GOOD_FILE = BASE + "/warehouse/" + "zCore" + "_realm/" + "config/" + "test-statistic-good.txt"
@@ -21,12 +21,12 @@ def match():
                 l = []
                 key = line[13:].split(' ')[0].strip()
                 l.append(line)
-            elif line.startswith('[       OK ]') and line.endswith(')\n'):
+            elif line.startswith('[       OK ]'):
                 l.append(line)
                 recording = False
                 passed_dic[key] = l
                 l = []
-            elif line.startswith('[  FAILED  ]') and line.endswith(')\n'):
+            elif line.startswith('[  FAILED  ]'):
                 recording = False
                 l.append(line)
                 need_to_fix_dic[key] = l
@@ -37,6 +37,20 @@ def match():
                 l =[]
                 l.append(line)
             elif line.startswith("panicked") and recording == True:
+                recording = False
+                l.append(line)
+                need_to_fix_dic[key] = l
+                l = []
+            elif line.startswith("ASSERT FAILED") and recording == True:
+                recording = False
+                l.append(line)
+                need_to_fix_dic[key] = l
+                l = []
+            elif line.startswith("qemu-system-x86_64") and recording == True:
+                recording = False
+                need_to_fix_dic[key] = l
+                l = []
+            elif line.startswith("BdsDxe") and recording == True:
                 recording = False
                 need_to_fix_dic[key] = l
                 l = []

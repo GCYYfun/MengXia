@@ -16,7 +16,7 @@ TEMP_DIFF = ""
 
 user = sys.argv[1]
 branch = sys.argv[2]
-BASE = "/home/own/work/MengXia"
+BASE = "/home/own/MengXia"
 OUTPUT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/logfile/" + branch + "/output.txt"
 RESULT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/result/" + branch +  "/test-result.txt"
 LAST_RESULT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/result/" + branch +  "/test-result-last.txt"
@@ -42,12 +42,12 @@ def compare_diff(branch,resultA = LAST_RESULT_FILE ,resultB = RESULT_FILE):
 
             diff_set = curr_set - last_set
             if len(diff_set) == 0:
-                f.write('当前总共 ' + str(len(curr_set)) + "个 测试 用例 \n所有测试与上次均无变化")
+                f.write(" Current total : " + str(len(curr_set)) + " test cases \n There are all no change")
             else:
                 for case in diff_set:
                     f.write("[更新]    " + case)
-                f.write('当前总共 ' + str(len(curr_set)) + '个测例 \n新增 测试 : ' +
-                        str(len(curr_set) - len(last_set)) + '\n变化测例 : ' +
+                f.write(" Current total : " + str(len(curr_set)) + " test cases \n New added : " +
+                        str(len(curr_set) - len(last_set)) + "\n Change test cases : " +
                         str(len(diff_set)))
 
         TEMP_DIFF = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/diff/" + branch + "/diff" + str(datetime.now().strftime("%Y-%m-%d-%H:%M:%S")+".txt")
@@ -61,14 +61,18 @@ def send_mail(file_name):
     porp = resp.strip().split('-')
     print(porp)
     sender = '734536637@qq.com'
-    if porp[1] == porp[3]:
-        receivers = [porp[2]]
-    else:
-        if porp[2].startswith("noreply@github.com"):
-            print("noreply")
-            receivers = [porp[4]]
-        else:
-            receivers = [porp[2], porp[4]]
+    mail_list = "zcore_info@groups.163.com"
+    receivers = [mail_list]
+
+    # if porp[1] == porp[3]:
+    #     receivers.append(porp[2])
+    # else:
+    #     if porp[2].startswith("noreply@github.com"):
+    #         print("noreply")
+    #         receivers.append(porp[4])
+    #     else:
+    #         receivers.append(porp[2])
+    #         receivers.append(porp[4])
 
     # receivers = [porp[2]]  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
 

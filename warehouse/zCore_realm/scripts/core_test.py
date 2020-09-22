@@ -22,11 +22,12 @@ branch = sys.argv[2]
 
 TIMEOUT = 10
 
-BASE = "/home/own/work/MengXia"
+BASE = "/home/own/MengXia"
 
 OUTPUT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/logfile/" + branch + "/output.txt"
 RESULT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/result/" + branch +  "/test-result.txt"
 TEST_CASES_FILE  = BASE + "/warehouse/" + "zCore" + "_realm/" + "config/" + "test_case.yaml"
+ALL_CASES  = BASE + "/warehouse/" + "zCore" + "_realm/" + "config/" + "all-test-cases.txt"
 STATISTIC_BAD_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/help_info/" + branch + "/test-statistic-bad.txt"
 STATISTIC_GOOD_FILE = BASE + "/warehouse/" + "zCore" + "_realm/" + user + "/help_info/" + branch + "/test-statistic-good.txt"
 
@@ -96,21 +97,24 @@ def write_arg(line):
         f.writelines(content)
 
 def perpare_data(name):
-    with open(TEST_CASES_FILE, "r") as f:
-        d = f.read()
-        # print(d)
-        l = []
-        test_case = yaml.load(d, Loader=Loader)
-        core_test = test_case.get(name)
-        if core_test != None:
-            # print(core_test.keys())
-            keys = core_test.keys()
-            for key in keys:
-                # print(core_test[key])
-                for t in core_test[key]:
-                    # print(key+'.'+t)
-                    l.append(format(key+'.'+t))
-    return l
+    with open(ALL_CASES, "r") as f:
+        lines = f.readlines()
+    return lines
+    # with open(TEST_CASES_FILE, "r") as f:
+    #     d = f.read()
+    #     # print(d)
+    #     l = []
+    #     test_case = yaml.load(d, Loader=Loader)
+    #     core_test = test_case.get(name)
+    #     if core_test != None:
+    #         # print(core_test.keys())
+    #         keys = core_test.keys()
+    #         for key in keys:
+    #             # print(core_test[key])
+    #             for t in core_test[key]:
+    #                 # print(key+'.'+t)
+    #                 l.append(format(key+'.'+t))
+    # return l
 
 def match():
     ansi_escape = re.compile(r"\x1B[@-_][0-?]*[ -/]*[@-~]")
@@ -127,12 +131,12 @@ def match():
                 l = []
                 key = line[13:].split(' ')[0].strip()
                 l.append(line)
-            elif line.startswith('[       OK ]') and line.endswith(')\n'):
+            elif line.startswith('[       OK ]'):
                 l.append(line)
                 recording = False
                 passed_dic[key] = l
                 l = []
-            elif line.startswith('[  FAILED  ]') and line.endswith(')\n'):
+            elif line.startswith('[  FAILED  ]'):
                 recording = False
                 l.append(line)
                 need_to_fix_dic[key] = l
@@ -143,6 +147,20 @@ def match():
                 l =[]
                 l.append(line)
             elif line.startswith("panicked") and recording == True:
+                recording = False
+                l.append(line)
+                need_to_fix_dic[key] = l
+                l = []
+            elif line.startswith("ASSERT FAILED") and recording == True:
+                recording = False
+                l.append(line)
+                need_to_fix_dic[key] = l
+                l = []
+            elif line.startswith("qemu-system-x86_64") and recording == True:
+                recording = False
+                need_to_fix_dic[key] = l
+                l = []
+            elif line.startswith("BdsDxe") and recording == True:
                 recording = False
                 need_to_fix_dic[key] = l
                 l = []

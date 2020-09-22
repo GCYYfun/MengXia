@@ -147,7 +147,7 @@ def update_fn(repo):
 def register_watch(repo, clone_fn, update_fn):
     if repo.url in repoManager.already_exist_repo:
         print(repo.user + ":" + repo.name + " repo存在 开始 监测更新")
-        schedule.every(10).seconds.do(update_fn, repo)
+        schedule.every(10).minutes.do(update_fn, repo)
     else:
         print(repo.user + ":" + repo.name + " repo不存在 clone并 开始 监测更新")
         # if os.path.exists("warehouse/" + repo.name + "_realm/" + repo.user +
@@ -156,7 +156,7 @@ def register_watch(repo, clone_fn, update_fn):
         #               "/" + repo.name)
         # os.chdir(PWD)
         clone_fn(repo)
-        schedule.every(1).minutes.do(update_fn, repo)
+        schedule.every(10).minutes.do(update_fn, repo)
 
 
 def main():
