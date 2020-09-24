@@ -100,7 +100,11 @@ def send_mail(file_name):
     #邮件正文内容
     message.attach(
         MIMEText(
-            porp[3] + ' commit : ' + porp[0] +' 的测试结果 \n\n'+format(("通过率 : " + str((float(PASSED)/float(TOTAL)) * 100) + "%"))+'\n'+format("不通过率 : " + str(((float(FAILED)+float(PANICKED)+float(TIMEOUT))/float(TOTAL)) * 100) + "%")+'\n'+format("超时率 : " + str((float(TIMEOUT)/float(TOTAL)) * 100) + "%")+'\n'+("崩溃率 : " + str((float(PANICKED)/float(TOTAL)) * 100) + "%")+'\n'+'\n\n  \n与上一次比较的变化内容见diff附件(没有diff则为第一次提交、无上次可比较信息)、\n全部测试结果见result附件、\n详细错误信息见info附件、 \n测试时间 ' +
+            '作者 ： ' + porp[3] + '\n' +
+            'github 用户 ： ' + user + '\n' +
+            '仓库 ： ' + 'zCore' + '\n' +
+            '分支 ： ' + branch + '\n' +
+            ' commit : ' + porp[0] +' 的测试结果 \n\n'+format(("通过率 : " + str((float(PASSED)/float(TOTAL)) * 100) + "%"))+'\n'+format("不通过率 : " + str(((float(FAILED)+float(PANICKED)+float(TIMEOUT))/float(TOTAL)) * 100) + "%")+'\n'+format("超时率 : " + str((float(TIMEOUT)/float(TOTAL)) * 100) + "%")+'\n'+("崩溃率 : " + str((float(PANICKED)/float(TOTAL)) * 100) + "%")+'\n'+'\n\n  \n与上一次比较的变化内容见diff附件(没有diff则为第一次提交、无上次可比较信息)、\n全部测试结果见result附件、\n详细错误信息见info附件、 \n测试时间 ' +
             str(datetime.now().strftime("%Y-%m-%d-%H:%M:%S")), 'plain',
             'utf-8'))
 

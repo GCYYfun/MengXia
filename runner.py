@@ -156,9 +156,10 @@ def running():
                             print("运行 libctest")
                             run_libc_test(r, b)
                 else:
-                    # run_core_test(r, b)
-                    # run_libc_test(r, b)
-                    print(repo_name,":",b,"无指定 测试")
+                    run_core_test(r, b)
+                    # run_libc_test(r, b)；
+                    # print(repo_name,":",b,"无指定 测试")
+                    print(repo_name,":",b,"非指定分支 进行 core-test测试")
         redisManager.finish_running(r)
         print("运行 完毕 清除 redis")
 
