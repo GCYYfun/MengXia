@@ -147,7 +147,7 @@ def update_fn(repo):
 def register_watch(repo, clone_fn, update_fn):
     if repo.url in repoManager.already_exist_repo:
         print(repo.user + ":" + repo.name + " repo存在 开始 监测更新")
-        schedule.every(10).minutes.do(update_fn, repo)
+        schedule.every(10).seconds.do(update_fn, repo)
     else:
         print(repo.user + ":" + repo.name + " repo不存在 clone并 开始 监测更新")
         # if os.path.exists("warehouse/" + repo.name + "_realm/" + repo.user +
@@ -196,12 +196,17 @@ def prepare_dir(repo):
 
 
 def prepare_branch_dir(branch,repo):
+
+    names = ["/zircon","/linux"]
+
+    for name in names:
     
-    subprocess.run("mkdir -p config/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
-    subprocess.run("mkdir -p diff/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
-    subprocess.run("mkdir -p result/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
-    subprocess.run("mkdir -p logfile/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
-    subprocess.run("mkdir -p help_info/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+        subprocess.run("mkdir -p config/" + branch + name,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+        subprocess.run("mkdir -p diff/" + branch + name,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+        subprocess.run("mkdir -p result/" + branch + name,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+        subprocess.run("mkdir -p logfile/" + branch + name,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+        subprocess.run("mkdir -p help_info/" + branch + name,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+
     # os.system("mkdir -p config/" + branch)
     # os.system("mkdir -p diff/" + branch)
     # os.system("mkdir -p result/" + branch)

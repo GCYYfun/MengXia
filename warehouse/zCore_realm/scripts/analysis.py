@@ -16,12 +16,13 @@ TEMP_DIFF = ""
 
 user = sys.argv[1]
 branch = sys.argv[2]
-BASE = "/home/own/MengXia"
-OUTPUT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/logfile/" + branch + "/output.txt"
-RESULT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/result/" + branch +  "/test-result.txt"
-LAST_RESULT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/result/" + branch +  "/test-result-last.txt"
-DIFF_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/diff/" + branch +  "/diff"
-STATISTIC_BAD_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/help_info/" + branch + "/test-statistic-bad.txt"
+BASE = "/home/own/work/MengXia"
+OUTPUT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/logfile/" + branch + "/zircon" + "/output.txt"
+RESULT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/result/" + branch +  "/zircon" + "/test-result.txt"
+LAST_RESULT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/result/" + branch + "/zircon" + "/test-result-last.txt"
+DIFF_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/diff/" + branch + "/zircon" + "/diff"
+STATISTIC_BAD_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/help_info/" + branch + "/zircon" + "/test-statistic-bad.txt"
+TEMP_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/diff/" + branch + "/zircon" + "/diff"
 # ================
 
 last_set = set()
@@ -50,7 +51,7 @@ def compare_diff(branch,resultA = LAST_RESULT_FILE ,resultB = RESULT_FILE):
                         str(len(curr_set) - len(last_set)) + "\n Change test cases : " +
                         str(len(diff_set)))
 
-        TEMP_DIFF = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/diff/" + branch + "/diff" + str(datetime.now().strftime("%Y-%m-%d-%H:%M:%S")+".txt")
+        TEMP_DIFF = TEMP_FILE + str(datetime.now().strftime("%Y-%m-%d-%H:%M:%S")+".txt")
         subprocess.run("mv " + DIFF_FILE + " " + TEMP_DIFF,shell=True)
         return TEMP_DIFF
 

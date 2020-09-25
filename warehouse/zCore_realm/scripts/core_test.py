@@ -22,14 +22,14 @@ branch = sys.argv[2]
 
 TIMEOUT = 10
 
-BASE = "/home/own/MengXia"
+BASE = "/home/own/work/MengXia"
 
-OUTPUT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/logfile/" + branch + "/output.txt"
-RESULT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/result/" + branch +  "/test-result.txt"
+OUTPUT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/logfile/" + branch + "/zircon" + "/output.txt"
+RESULT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/result/" + branch + "/zircon" + "/test-result.txt"
 TEST_CASES_FILE  = BASE + "/warehouse/" + "zCore" + "_realm/" + "config/" + "test_case.yaml"
 ALL_CASES  = BASE + "/warehouse/" + "zCore" + "_realm/" + "config/" + "all-test-cases.txt"
-STATISTIC_BAD_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/help_info/" + branch + "/test-statistic-bad.txt"
-STATISTIC_GOOD_FILE = BASE + "/warehouse/" + "zCore" + "_realm/" + user + "/help_info/" + branch + "/test-statistic-good.txt"
+STATISTIC_BAD_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/help_info/" + branch + "/zircon" + "/test-statistic-bad.txt"
+STATISTIC_GOOD_FILE = BASE + "/warehouse/" + "zCore" + "_realm/" + user + "/help_info/" + branch + "/zircon" + "/test-statistic-good.txt"
 
 PROCESSES = 1
 PREBATCH = 1

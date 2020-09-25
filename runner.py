@@ -56,7 +56,7 @@ def run_core_test(repo, branch):
 
     user = repo.split(":")[0]
     name = repo.split(":")[1]
-    subprocess.run("git checkout " + branch,shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name)
+    # subprocess.run("git checkout " + branch,shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name)
     # switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name)
     # os.system("git checkout " + branch)
 
@@ -102,16 +102,21 @@ def run_libc_test(repo, branch):
 
     ## 进入 仓库
     print(user, " - ", name, "libc开始运行")
-    subprocess.run("git checkout " + branch,shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name)
+    # subprocess.run("git checkout " + branch,shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name)
     # switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name)
     ## build
-    subprocess.run("make rootfs && make libc-test",shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name)
+    # subprocess.run("make rootfs && make libc-test",shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name)
     # os.system("make rootfs && make libc-test")
+    subprocess.run("git checkout " + branch,shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
+    subprocess.run("make rootfs && make libc-test",shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
+    subprocess.run("cargo build --release -p linux-loader",shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
+
+
     ## 指定当前工作目录
     # switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name +
     #            "/scripts")
     ## 执行测试
-    subprocess.run("python3 parallel-test.py " + branch,shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name + "/scripts")
+    subprocess.run("python3 libc_test.py " + user +" "+ branch,shell=True,cwd="warehouse/" + name + "_realm/" + "scripts")
     # os.system("python3 libc-tests.py")
     # switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name +
     #            "/zCore")
