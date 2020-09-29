@@ -70,6 +70,25 @@ sudo apt install musl-tools musl-dev
 sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils
 ```
 
+### 运行 rcore 所需要的 配置
+
+需要 rust 
+
+需要 musl
+
+
+
+### 运行 rCore-Tutorial 所需要的 配置
+
+需要 一个 sifive 的 一个 工具连 、建议 联系 作者 改进、去掉
+
+或者 升级 测试 架构
+
+https://www.sifive.com/software
+
+GNU Embedded Toolchain  Ubuntu
+
+
 ## 获取
 
 ```
