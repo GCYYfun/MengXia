@@ -149,16 +149,6 @@ def send_mail(file_name):
     mail_user = "734536637@qq.com"  #用户名
     mail_pass = "srjduzcigxgqbeha"  #口令
 
-    # 网易
-    # mail_host='smtp.163.com'
-    # mail_user='cx734536637@163.com'    #用户名
-    # mail_pass='MSJHKKZZOYNLQRWN'   #口令
-    # 网易 MSJHKKZZOYNLQRWN
-
-    # mail_host = 'smtp.163.com'
-    # mail_user = 'zcore_devinfo@163.com'    #用户名
-    # mail_pass = 'DWCJDLLPXOXPEOPA'
-
     smtpObj = smtplib.SMTP()
     smtpObj.connect(mail_host, 25)  # 25 为 SMTP 端口号
     smtpObj.login(mail_user, mail_pass)
