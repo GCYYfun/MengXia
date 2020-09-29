@@ -22,7 +22,7 @@ branch = sys.argv[2]
 
 TIMEOUT = 10
 
-BASE = "/home/own/work/MengXia"
+BASE = "/home/own/MengXia"
 
 OUTPUT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/logfile/" + branch + "/zircon" + "/output.txt"
 RESULT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/result/" + branch + "/zircon" + "/test-result.txt"
