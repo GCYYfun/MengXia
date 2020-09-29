@@ -1,7 +1,12 @@
-!/warehouse/zCore_realm/scripts/*
-!/warehouse/zCore_realm/config/*
-/warehouse/zCore_realm/
-/warehouse/rCore-Tutorial_realm/
+/warehouse/zCore_realm/*
+/warehouse/rCore_realm/*
+/warehouse/rCore-Tutorial_realm/*
+!/warehouse/zCore_realm/scripts/
+!/warehouse/zCore_realm/config/
+!/warehouse/rCore_realm/scripts/
+!/warehouse/rCore_realm/config/
+!/warehouse/rCore-Tutorial_realm/scripts/
+!/warehouse/rCore-Tutorial_realm/config/
 /ownlib/__pycache__/
 /config/already_clone.yaml
 test.py

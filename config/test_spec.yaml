@@ -1,7 +1,11 @@
 zCore:
   master:
-    # - libc_test
+    - libc_test
     - core_test
-  GCYYfun:
-    # - libc_test
-    - core_test
+rCore:
+  master:
+    - libc_test
+rCore-Tutorial:
+  multicore:
+    - k210
+    - qemu

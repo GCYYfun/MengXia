@@ -38,9 +38,10 @@ class RedisManager:
         if not self.redis.exists(self.status):
             return exist_repo
         else:
-            for repo in repos:
-                if self.redis.sismember(self.status, repo):
-                    exist_repo.append(repo)
+            for name in repos:
+                for repo in repos[name]:
+                    if self.redis.sismember(self.status, repo):
+                        exist_repo.append(repo)
             return exist_repo
 
     def add_exist_repo(self, url):

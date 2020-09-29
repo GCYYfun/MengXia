@@ -16,12 +16,16 @@ TEMP_DIFF = ""
 
 user = sys.argv[1]
 branch = sys.argv[2]
-BASE = "/home/own/MengXia"
-OUTPUT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/logfile/" + branch + "/output.txt"
-RESULT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/result/" + branch +  "/test-result.txt"
-LAST_RESULT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/result/" + branch +  "/test-result-last.txt"
-DIFF_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/diff/" + branch +  "/diff"
-STATISTIC_BAD_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/help_info/" + branch + "/test-statistic-bad.txt"
+BASE = "/home/own/work/MengXia"
+OUTPUT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/logfile/" + branch + "/zircon" + "/output.txt"
+RESULT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/result/" + branch +  "/zircon" + "/test-result.txt"
+LAST_RESULT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/result/" + branch + "/zircon" + "/test-result-last.txt"
+DIFF_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/diff/" + branch + "/zircon" + "/diff"
+STATISTIC_BAD_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/help_info/" + branch + "/zircon" + "/test-statistic-bad.txt"
+TEMP_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/diff/" + branch + "/zircon" + "/diff"
+
+# 临时添加 有待改进 有历史 记录
+LIBC_LOGFILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/logfile/" + branch + "/linux" + "/libc_output.txt"
 # ================
 
 last_set = set()
@@ -50,7 +54,7 @@ def compare_diff(branch,resultA = LAST_RESULT_FILE ,resultB = RESULT_FILE):
                         str(len(curr_set) - len(last_set)) + "\n Change test cases : " +
                         str(len(diff_set)))
 
-        TEMP_DIFF = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/diff/" + branch + "/diff" + str(datetime.now().strftime("%Y-%m-%d-%H:%M:%S")+".txt")
+        TEMP_DIFF = TEMP_FILE + str(datetime.now().strftime("%Y-%m-%d-%H:%M:%S")+".txt")
         subprocess.run("mv " + DIFF_FILE + " " + TEMP_DIFF,shell=True)
         return TEMP_DIFF
 
@@ -60,7 +64,7 @@ def send_mail(file_name):
     resp = os.popen('git log --pretty=tformat:%h-%cn-%ce-%an-%ae -1').readline()
     porp = resp.strip().split('-')
     print(porp)
-    sender = '734536637@qq.com'
+    sender = 'zcore_devinfo@163.com'
     mail_list = "zcore_info@groups.163.com"
     receivers = [mail_list]
 
@@ -127,17 +131,29 @@ def send_mail(file_name):
     att3["Content-Disposition"] = 'attachment; filename="info.txt"'
     message.attach(att3)
 
+    if os.path.exists(LIBC_LOGFILE):
+        att4 = MIMEText(open(LIBC_LOGFILE, 'rb').read(), 'base64', 'utf-8')
+        att4["Content-Type"] = 'application/octet-stream'
+        # 这里的filename可以任意写，写什么名字，邮件中显示什么名字
+        att4["Content-Disposition"] = 'attachment; filename="libc_info.txt"'
+        message.attach(att4)    
+
     # 第三方 SMTP 服务
     # QQ
-    mail_host = "smtp.qq.com"  #设置服务器
-    mail_user = "734536637@qq.com"  #用户名
-    mail_pass = "srjduzcigxgqbeha"  #口令
+
+    # mail_host = "smtp.qq.com"  #设置服务器
+    # mail_user = "734536637@qq.com"  #用户名
+    # mail_pass = "srjduzcigxgqbeha"  #口令
 
     # 网易
     # mail_host='smtp.163.com'
     # mail_user='cx734536637@163.com'    #用户名
     # mail_pass='MSJHKKZZOYNLQRWN'   #口令
     # 网易 MSJHKKZZOYNLQRWN
+
+    mail_host = 'smtp.163.com'
+    mail_user = 'zcore_devinfo@163.com'    #用户名
+    mail_pass = 'DWCJDLLPXOXPEOPA'
 
     smtpObj = smtplib.SMTP()
     smtpObj.connect(mail_host, 25)  # 25 为 SMTP 端口号
