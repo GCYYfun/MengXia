@@ -197,15 +197,38 @@ def prepare_dir(repo):
 
 def prepare_branch_dir(branch,repo):
 
-    names = ["/zircon","/linux"]
+    if repo.name == "zCore":
+        names = ["/zircon","/linux"]
 
-    for name in names:
-    
-        subprocess.run("mkdir -p config/" + branch + name,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
-        subprocess.run("mkdir -p diff/" + branch + name,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
-        subprocess.run("mkdir -p result/" + branch + name,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
-        subprocess.run("mkdir -p logfile/" + branch + name,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
-        subprocess.run("mkdir -p help_info/" + branch + name,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+        for name in names:
+
+            subprocess.run("mkdir -p config/" + branch + name,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+            subprocess.run("mkdir -p diff/" + branch + name,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+            subprocess.run("mkdir -p result/" + branch + name,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+            subprocess.run("mkdir -p logfile/" + branch + name,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+            subprocess.run("mkdir -p help_info/" + branch + name,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+    elif repo.name == "rCore":
+        subprocess.run("mkdir -p config/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+        subprocess.run("mkdir -p diff/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+        subprocess.run("mkdir -p result/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+        subprocess.run("mkdir -p logfile/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+        subprocess.run("mkdir -p help_info/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+    elif repo.name == "rCore-Tutorial":
+        names = ["/qemu","/k210"]
+
+        for name in names:
+
+            subprocess.run("mkdir -p config/" + branch + name,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+            subprocess.run("mkdir -p diff/" + branch + name,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+            subprocess.run("mkdir -p result/" + branch + name,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+            subprocess.run("mkdir -p logfile/" + branch + name,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+            subprocess.run("mkdir -p help_info/" + branch + name,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+    else:
+        subprocess.run("mkdir -p config/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+        subprocess.run("mkdir -p diff/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+        subprocess.run("mkdir -p result/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+        subprocess.run("mkdir -p logfile/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
+        subprocess.run("mkdir -p help_info/" + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user)
 
     # os.system("mkdir -p config/" + branch)
     # os.system("mkdir -p diff/" + branch)
@@ -232,7 +255,7 @@ def request_repo_branches(repo):
     branches = json.loads(json_branches)
 
     # switch_dir("./warehouse/" + repo.name + "_realm/" + repo.user)
-    print("准备 branch dir")
+    print("准备 分支 目录")
     for branche in branches:
         prepare_branch_dir(branche["name"],repo)
     print("准备 完毕")
@@ -278,7 +301,7 @@ def compare_branch_info(repo, curr_branches):
     # print(change)
 
     if len(change) != 0:
-        print("有变化 : ", change)
+        print("有变化的分支 : \n", change)
         for o in change:
             # branch = o.split(":")[1].split(",")[0].replace("\"", "").strip()
             branch = o.split(":")[0].strip()
@@ -307,18 +330,18 @@ def update_branch(repo, modified_branches):
 
     for branch in modified_branches:
         for br in branch_res:
-            print("匹配 ", br)
+            print("尝试 : ", br)
             if br.startswith("*") and branch == br.replace("*", "").strip():
-                print("匹配 成功 且 当前分支 就是", branch)
+                print("成功")
                 break
             if br == branch:
-                print("匹配 成功 ")
-                print("checkout :", branch)
-                subprocess.run("git checkout " + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user + "/" + repo.name)
+                print("成功 ")
+                print("checkout : ", branch)
+                subprocess.run("git checkout -f " + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user + "/" + repo.name)
                 break
-            print("branch 匹配  失败")
+            print("失配、下一个")
         else:
-            print("创建 分支 并 切换")
+            print("新分支、创建并切换")
             subprocess.run("git checkout -b " + branch,shell=True,cwd="warehouse/" + repo.name + "_realm/" + repo.user + "/" + repo.name)
 
         try:

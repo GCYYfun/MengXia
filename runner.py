@@ -38,6 +38,7 @@ redisManager = rdm.RedisManager()
 
 
 def main():
+    print("PWD ",PWD)
     os.chdir(PWD)  # 设置工作目录
     # 定时 读取 redis
     # wait_for_test = take_need_test_branch()
@@ -107,9 +108,9 @@ def run_libc_test(repo, branch):
     ## build
     # subprocess.run("make rootfs && make libc-test",shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name)
     # os.system("make rootfs && make libc-test")
-    subprocess.run("git checkout " + branch,shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
-    subprocess.run("make rootfs && make libc-test",shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
-    subprocess.run("cargo build --release -p linux-loader",shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
+    # subprocess.run("git checkout " + branch,shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
+    # subprocess.run("make rootfs && make libc-test",shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
+    # subprocess.run("cargo build --release -p linux-loader",shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
 
 
     ## 指定当前工作目录
@@ -125,6 +126,57 @@ def run_libc_test(repo, branch):
     print(user, " - ", name, "libc运行结束")
     # os.chdir(PWD)
 
+def run_rcore_libc(repo, branch):
+    user = repo.split(":")[0]
+    name = repo.split(":")[1]
+
+    print(user, " - ", name, "libc开始运行")
+
+    # build
+
+    subprocess.run("git checkout " + branch,shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
+    # subprocess.run("make rootfs && make libc-test",shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
+    # subprocess.run("cargo build --release -p linux-loader",shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
+
+    # run 
+    subprocess.run("python3 libc_test.py " + user +" "+ branch,shell=True,cwd="warehouse/" + name + "_realm/" + "scripts")
+
+    print(user, " - ", name, "libc运行结束")
+
+def run_qemu(repo, branch):
+    user = repo.split(":")[0]
+    name = repo.split(":")[1]
+
+    print(user, " - ", name, "qemu开始运行")
+
+    # build
+
+    # subprocess.run("git checkout " + branch,shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
+    # subprocess.run("make rootfs && make libc-test",shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
+    # subprocess.run("cargo build --release -p linux-loader",shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
+
+    # run 
+    subprocess.run("python3 run_qemu.py " + user +" "+ branch,shell=True,cwd="./warehouse/" + name + "_realm/" + "scripts")
+    # subprocess.run("python3 local.py " + user +" "+ branch,shell=True,cwd="warehouse/" + name + "_realm/" + "scripts")
+
+    print(user, " - ", name, "qemu运行结束")
+
+def run_k210(repo, branch):
+    user = repo.split(":")[0]
+    name = repo.split(":")[1]
+
+    print(user, " - ", name, "k210开始运行")
+
+    # build
+
+    # subprocess.run("git checkout " + branch,shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
+    # subprocess.run("make rootfs && make libc-test",shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
+    # subprocess.run("cargo build --release -p linux-loader",shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
+
+    # run 
+    subprocess.run("python3 run_k210.py " + user +" "+ branch,shell=True,cwd="./warehouse/" + name + "_realm/" + "scripts")
+
+    print(user, " - ", name, "k210运行结束")
 
 def running():
     # 设置 占用
@@ -151,20 +203,33 @@ def running():
                     fns = None
                 # 进入 仓库 进入 分支 执行 测试
                 if fns != None:
-                    print("指定 测试 ")
+                    print("指定 测试 ",fns)
                     for i in fns:
                         print(i)
-                        if i == "core_test":
-                            print("运行 coretest")
-                            run_core_test(r, b)
-                        elif i == "libc_test":
-                            print("运行 libctest")
-                            run_libc_test(r, b)
+                        if repo_name == "zCore":
+                            if i == "core_test":
+                                print("运行 coretest")
+                                run_core_test(r, b)
+                            elif i == "libc_test":
+                                print("运行 libctest")
+                                run_libc_test(r, b)
+                        elif repo_name == "rCore":
+                            if i == "libc_test":
+                                print("运行 libctest")
+                                print("暂时 有问题")
+                                # run_rcore_libc(r, b)
+                        elif repo_name == "rCore-Tutorial":
+                            if i == "qemu":
+                                print("运行 qemu_run")
+                                run_qemu(r, b)
+                            elif i == "k210":
+                                print("运行 k210")
+                                run_k210(r, b)
                 else:
-                    run_core_test(r, b)
+                    # run_core_test(r, b)
                     # run_libc_test(r, b)；
                     # print(repo_name,":",b,"无指定 测试")
-                    print(repo_name,":",b,"非指定分支 进行 core-test测试")
+                    print(repo_name,":",b,"非指定分支 不进行测试")
         redisManager.finish_running(r)
         print("运行 完毕 清除 redis")
 

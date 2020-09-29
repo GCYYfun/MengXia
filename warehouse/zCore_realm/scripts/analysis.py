@@ -23,6 +23,9 @@ LAST_RESULT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/result
 DIFF_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/diff/" + branch + "/zircon" + "/diff"
 STATISTIC_BAD_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/help_info/" + branch + "/zircon" + "/test-statistic-bad.txt"
 TEMP_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/diff/" + branch + "/zircon" + "/diff"
+
+# 临时添加 有待改进 有历史 记录
+LIBC_LOGFILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/logfile/" + branch + "/linux" + "/libc_output.txt"
 # ================
 
 last_set = set()
@@ -128,17 +131,29 @@ def send_mail(file_name):
     att3["Content-Disposition"] = 'attachment; filename="info.txt"'
     message.attach(att3)
 
+    if os.path.exists(LIBC_LOGFILE):
+        att4 = MIMEText(open(LIBC_LOGFILE, 'rb').read(), 'base64', 'utf-8')
+        att4["Content-Type"] = 'application/octet-stream'
+        # 这里的filename可以任意写，写什么名字，邮件中显示什么名字
+        att4["Content-Disposition"] = 'attachment; filename="libc_info.txt"'
+        message.attach(att4)    
+
     # 第三方 SMTP 服务
     # QQ
-    mail_host = "smtp.qq.com"  #设置服务器
-    mail_user = "734536637@qq.com"  #用户名
-    mail_pass = "srjduzcigxgqbeha"  #口令
+
+    # mail_host = "smtp.qq.com"  #设置服务器
+    # mail_user = "734536637@qq.com"  #用户名
+    # mail_pass = "srjduzcigxgqbeha"  #口令
 
     # 网易
     # mail_host='smtp.163.com'
     # mail_user='cx734536637@163.com'    #用户名
     # mail_pass='MSJHKKZZOYNLQRWN'   #口令
     # 网易 MSJHKKZZOYNLQRWN
+
+    mail_host = 'smtp.163.com'
+    mail_user = 'zcore_devinfo@163.com'    #用户名
+    mail_pass = 'DWCJDLLPXOXPEOPA'
 
     smtpObj = smtplib.SMTP()
     smtpObj.connect(mail_host, 25)  # 25 为 SMTP 端口号

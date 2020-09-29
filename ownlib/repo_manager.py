@@ -60,11 +60,11 @@ class RepoManager:
         print("读取 仓库 url 列表 完成 ")
 
         print("全部需要观测的仓库：")
-        for repo in self.repos_url:
-            r = Repo(repo)
-            self.repos.append(r)
-            print("仓库： ", r.user, "-", r.name)
-
+        for repo_name in self.repos_url:
+            for repo in self.repos_url[repo_name]:
+                r = Repo(repo)
+                self.repos.append(r)
+                print("仓库： ", r.user, "-", r.name)
         print("仓库 列表 完成")
 
         self.already_exist_repo_url = redis.repo_status(self.repos_url)
