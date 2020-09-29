@@ -11,7 +11,7 @@ import pexpect
 import subprocess
 import os
 
-PWD = "/home/own/work/MengXia"
+PWD = "/home/own/MengXia"
 
 LOGFILE_FILE = PWD + "/warehouse/zCore_realm/GCYYfun/logfile/master/logfile"
 

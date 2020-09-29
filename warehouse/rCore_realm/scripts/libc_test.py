@@ -10,7 +10,7 @@ branch = sys.argv[2]
 
 #===============Must Config========================
 
-BASE = "/home/own/work/MengXia"
+BASE = "/home/own/MengXia"
 
 OVMF = "rboot/OVMF.fd"
 ESP = "kernel/target/x86_64/release/esp"

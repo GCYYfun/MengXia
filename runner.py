@@ -226,7 +226,8 @@ def running():
                                 print("运行 k210")
                                 run_k210(r, b)
                 else:
-                    # run_core_test(r, b)
+                    if repo_name == "zCore":
+                        run_core_test(r, b)
                     # run_libc_test(r, b)；
                     # print(repo_name,":",b,"无指定 测试")
                     print(repo_name,":",b,"非指定分支 不进行测试")
@@ -235,7 +236,7 @@ def running():
 
 
 def start_runner():
-    schedule.every(10).seconds.do(running)
+    schedule.every(1).minutes.do(running)
 
 
 def take_need_test_branch():

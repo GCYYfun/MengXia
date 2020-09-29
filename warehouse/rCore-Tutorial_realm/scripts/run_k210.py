@@ -10,7 +10,7 @@ branch = sys.argv[2]
 
 #===============File Config========================
 
-BASE = "/home/own/work/MengXia"
+BASE = "/home/own/MengXia"
 
 LOGFILE = BASE + "/warehouse" + "/rCore-Tutorial" + "_realm/" + user + "/logfile/" + branch + "/k210" + "/logfile.txt"
 RESULT = BASE + "/warehouse" + "/rCore-Tutorial" + "_realm/" + user + "/result/" + branch + "/k210" + "/result.txt"

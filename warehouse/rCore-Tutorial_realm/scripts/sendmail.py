@@ -15,7 +15,7 @@ subprocess.run("pwd")
 
 user = sys.argv[1]
 branch = sys.argv[2]
-BASE = "/home/own/work/MengXia"
+BASE = "/home/own/MengXia"
 
 QEMU_RESULT_FILE = BASE + "/warehouse/" + "rCore-Tutorial" + "_realm/"  + user + "/result/" + branch + "/qemu" + "/result.txt"
 QEMU_LOGFILE = BASE + "/warehouse/" + "rCore-Tutorial" + "_realm/"  + user + "/logfile/" + branch + "/qemu" + "/logfile.txt"
@@ -25,7 +25,7 @@ K210_LOGFILE = BASE + "/warehouse/" + "rCore-Tutorial" + "_realm/"  + user + "/l
 # ================
 
 def send_mail():
-    os.chdir(BASE + "/warehouse/" + "rCore" + "_realm/" + user + "/" + "rCore")
+    os.chdir(BASE + "/warehouse/" + "rCore-Tutorial" + "_realm/" + user + "/" + "rCore-Tutorial")
     resp = os.popen('git log --pretty=tformat:%h-%cn-%ce-%an-%ae -1').readline()
     porp = resp.strip().split('-')
     print(porp)
@@ -71,9 +71,9 @@ def send_mail():
         MIMEText(
             '作者 ： ' + porp[3] + '\n' +
             'github 用户 ： ' + user + '\n' +
-            '仓库 ： ' + 'rCore' + '\n' +
+            '仓库 ： ' + 'rCore-Tutorial' + '\n' +
             '分支 ： ' + branch + '\n' +
-            ' commit : ' + porp[0] +' 的libc测试结果 \n\n'+
+            ' commit : ' + porp[0] +' 的 qemu and k210 测试结果 \n\n'+
             '\n\n  \n目前还没有对此具体的分析、仅显示统计 结果见result附件、 \n测试时间 ' +
             str(datetime.now().strftime("%Y-%m-%d-%H:%M:%S")), 'plain',
             'utf-8'))
@@ -105,19 +105,9 @@ def send_mail():
     # 第三方 SMTP 服务
     # QQ
 
-    # mail_host = "smtp.qq.com"  #设置服务器
-    # mail_user = "734536637@qq.com"  #用户名
-    # mail_pass = "srjduzcigxgqbeha"  #口令
-
-    # 网易
-    # mail_host='smtp.163.com'
-    # mail_user='cx734536637@163.com'    #用户名
-    # mail_pass='MSJHKKZZOYNLQRWN'   #口令
-    # 网易 MSJHKKZZOYNLQRWN
-
-    mail_host = 'smtp.163.com'
-    mail_user = 'zcore_devinfo@163.com'    #用户名
-    mail_pass = 'DWCJDLLPXOXPEOPA'
+    mail_host = "smtp.qq.com"  #设置服务器
+    mail_user = "734536637@qq.com"  #用户名
+    mail_pass = "srjduzcigxgqbeha"  #口令
 
     smtpObj = smtplib.SMTP()
     smtpObj.connect(mail_host, 25)  # 25 为 SMTP 端口号

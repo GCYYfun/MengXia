@@ -16,7 +16,7 @@ TEMP_DIFF = ""
 
 user = sys.argv[1]
 branch = sys.argv[2]
-BASE = "/home/own/work/MengXia"
+BASE = "/home/own/MengXia"
 OUTPUT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/logfile/" + branch + "/zircon" + "/output.txt"
 RESULT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/result/" + branch +  "/zircon" + "/test-result.txt"
 LAST_RESULT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/result/" + branch + "/zircon" + "/test-result-last.txt"
@@ -64,7 +64,7 @@ def send_mail(file_name):
     resp = os.popen('git log --pretty=tformat:%h-%cn-%ce-%an-%ae -1').readline()
     porp = resp.strip().split('-')
     print(porp)
-    sender = 'zcore_devinfo@163.com'
+    sender = '734536637@qq.com'
     mail_list = "zcore_info@groups.163.com"
     receivers = [mail_list]
 
@@ -141,9 +141,9 @@ def send_mail(file_name):
     # 第三方 SMTP 服务
     # QQ
 
-    # mail_host = "smtp.qq.com"  #设置服务器
-    # mail_user = "734536637@qq.com"  #用户名
-    # mail_pass = "srjduzcigxgqbeha"  #口令
+    mail_host = "smtp.qq.com"  #设置服务器
+    mail_user = "734536637@qq.com"  #用户名
+    mail_pass = "srjduzcigxgqbeha"  #口令
 
     # 网易
     # mail_host='smtp.163.com'
@@ -151,9 +151,9 @@ def send_mail(file_name):
     # mail_pass='MSJHKKZZOYNLQRWN'   #口令
     # 网易 MSJHKKZZOYNLQRWN
 
-    mail_host = 'smtp.163.com'
-    mail_user = 'zcore_devinfo@163.com'    #用户名
-    mail_pass = 'DWCJDLLPXOXPEOPA'
+    # mail_host = 'smtp.163.com'
+    # mail_user = 'zcore_devinfo@163.com'    #用户名
+    # mail_pass = 'DWCJDLLPXOXPEOPA'
 
     smtpObj = smtplib.SMTP()
     smtpObj.connect(mail_host, 25)  # 25 为 SMTP 端口号
