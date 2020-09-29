@@ -64,7 +64,7 @@ def send_mail(file_name):
     resp = os.popen('git log --pretty=tformat:%h-%cn-%ce-%an-%ae -1').readline()
     porp = resp.strip().split('-')
     print(porp)
-    sender = '734536637@qq.com'
+    sender = 'zcore_devinfo@163.com'
     mail_list = "zcore_info@groups.163.com"
     receivers = [mail_list]
 
