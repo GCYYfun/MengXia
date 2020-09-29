@@ -1,77 +1,11 @@
 zCore:
     - https://github.com/GCYYfun/zCore
-    # - https://github.com/rcore-os/zCore
-    # - https://github.com/wfly1998/zCore
-    # - https://github.com/skubla-os/zCore
-    # - https://github.com/Lincyaw/zCore
-    # - https://github.com/SKTT1Ryze/zCore
-    # - https://github.com/Yufei-YAO/zCore
-    # - https://github.com/iLFTH/zCore
-    # - https://github.com/wying8349/zCore
-    # - https://github.com/xushanpu123/zCore
-    # - https://github.com/dingiso/zCore
-    # - https://github.com/losfair/zCore
-    # - https://github.com/stellarkey/zCore
-    # - https://github.com/yunwei37/zCore
-    # - https://github.com/VitalyAnkh/zCore
-    # - https://github.com/trialley/zCore
-    # - https://github.com/Benjamin-UnderWood/zCore
-    # - https://github.com/jianglu/zCore
-    # - https://github.com/yjhmelody/zCore
-    # - https://github.com/sudo-jack-admin/zCore
-    # - https://github.com/xue-zhiming/zCore
-    # - https://github.com/PanQL/zCore
-    # - https://github.com/Hoblovski/zCore
-    # - https://github.com/overmind1980/zCore
-    # - https://github.com/EXHades/zCore
-    # - https://github.com/xxchan/zCore
-    # - https://github.com/equation314/zCore
-    # - https://github.com/BurtonQin/zCore
-    # - https://github.com/weixiao-huang/zCore
-    # - https://github.com/DnailZ/zCore
-    # - https://github.com/xy-plus/zCore
-    # - https://github.com/interpidtjuniversity/zCore
-    # - https://github.com/CircuitCoder/zCore
-    # - https://github.com/JiYou/zCore
-    # - https://github.com/emailhy/zCore
-    # - https://github.com/Rustin-Liu/zCore
-    # - https://github.com/520233xyz/zCore
-    # - https://github.com/ZhuZhengyi/zCore
-    # - https://github.com/ricardoforever/zCore
-    # - https://github.com/benpigchu/zCore
-    # - https://github.com/Chinory/zCore
-    # - https://github.com/rcore-os-async/zCore
-    # - https://github.com/xuzhaokui/zCore
-    # - https://github.com/rustyforks/zCore
-    # - https://github.com/KennyGlacier/zCore
-    # - https://github.com/asked637/zCore
-    # - https://github.com/kisskillkiss/zCore
-    # - https://github.com/kulame/zCore
-    # - https://github.com/acproject/zCore
-    # - https://github.com/ok266/zCore
-    # - https://github.com/allchain/zCore
-    # - https://github.com/fiag/zCore
-    # - https://github.com/wuyp/zCore
-    # - https://github.com/juqkai/zCore
-    # - https://github.com/gaoxiaojun/zCore
-    # - https://github.com/xbee/zCore
-    # - https://github.com/maxre404/zCore
-    # - https://github.com/lsgw/zCore
-    # - https://github.com/ccszwg/zCore
-    # - https://github.com/lwshang/zCore
-    # - https://github.com/yutiansut/zCore
-    # - https://github.com/ZerounNet/zCore
-    # - https://github.com/xiaolongn100/zCore
-    # - https://github.com/chyyuu/zCore
-    # - https://github.com/tomzhang/zCore
-    # - https://github.com/x1957/zCore
-    # - https://github.com/juniuszhou/zCore
-    # - https://github.com/mkmojo/zCore
-    # - https://github.com/ops-l/zCore
-    # - https://github.com/rzswh/zCore
-    # - https://github.com/StevenMeng5898/zCore
-    # - https://github.com/3ways/zCore
-    # - https://github.com/DeathWish5/zCore
+    - https://github.com/rcore-os/zCore
+    - https://github.com/xushanpu123/zCore
+    - https://github.com/equation314/zCore
+    - https://github.com/xy-plus/zCore
+    - https://github.com/benpigchu/zCore
+    - https://github.com/chyyuu/zCore
 rCore:
     - https://github.com/GCYYfun/rCore
 rCore-Tutorial:

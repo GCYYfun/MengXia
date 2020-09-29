@@ -25,3 +25,16 @@ systemctl status MengxiaWatcher.service
 systemctl restart MengxiaWatcher.service  
 systemctl stop MengxiaWatcher.service	  
 systemctl start MengxiaWatcher.service  
+
+
+screen -ls
+
+screen -L -t watcher -dmS watcher
+screen -r watcher
+conda activate MengXia
+python3 watcher.py
+
+screen -L -t runner -dmS runner 
+screen -r runner
+conda activate MengXia
+python3 runner.py
