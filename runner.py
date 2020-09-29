@@ -38,12 +38,9 @@ redisManager = rdm.RedisManager()
 
 
 def main():
-    print("PWD ",PWD)
+    print("PWD ", PWD)
     os.chdir(PWD)  # 设置工作目录
-    # 定时 读取 redis
-    # wait_for_test = take_need_test_branch()
 
-    # running(wait_for_test)
     start_runner()
 
     ## 开启监听
@@ -57,41 +54,18 @@ def run_core_test(repo, branch):
 
     user = repo.split(":")[0]
     name = repo.split(":")[1]
-    # subprocess.run("git checkout " + branch,shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name)
-    # switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name)
-    # os.system("git checkout " + branch)
 
     print(user, " - ", name, "coretest开始运行")
-    ## 进入 仓库
-    # os.chdir(PWD)
-    # os.chdir("./warehouse/" + repo.name + "_realm/" + repo.user + "/" +
-    #          repo.name + "/zCore")
-    # ## build
-    # switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name +
-    #            "/zCore")
-    # os.system("make build-parallel-test mode=release")
 
-    # subprocess.run("make build-parallel-test mode=release",shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name + "/zCore")
-    subprocess.run("python3 core_test.py " + user +" "+ branch,shell=True,cwd="warehouse/" + name + "_realm/" + "scripts")
-    # subprocess.run("python3 core-tests.py",shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name + "/scripts")
-    
-    # os.chdir(PWD)
-    # ## 指定当前工作目录
-    # switch_dir("./warehouse/" + name + "_realm/" + user)
-    # ## 执行测试
-    # os.system("python3 ../parallel-test.py " + branch)
-    
-    # subprocess.run("python3 parallel-test.py " + branch,shell=True,cwd="warehouse/" + name + "_realm/scripts")
-    
-    # os.chdir(PWD)
-    # switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name +
-    #            "/zCore")
-    # os.system("make clean")
-    subprocess.run("make clean",shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name + "/zCore")
+    subprocess.run("python3 core_test.py " + user + " " + branch,
+                   shell=True,
+                   cwd="warehouse/" + name + "_realm/" + "scripts")
+
+    subprocess.run("make clean",
+                   shell=True,
+                   cwd="warehouse/" + name + "_realm/" + user + "/" + name +
+                   "/zCore")
     print(user, " - ", name, "coretest运行结束")
-    # os.chdir(PWD)
-
-    pass
 
 
 def run_libc_test(repo, branch):
@@ -103,28 +77,14 @@ def run_libc_test(repo, branch):
 
     ## 进入 仓库
     print(user, " - ", name, "libc开始运行")
-    # subprocess.run("git checkout " + branch,shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name)
-    # switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name)
     ## build
-    # subprocess.run("make rootfs && make libc-test",shell=True,cwd="warehouse/" + name + "_realm/" + user + "/" + name)
-    # os.system("make rootfs && make libc-test")
-    # subprocess.run("git checkout " + branch,shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
-    # subprocess.run("make rootfs && make libc-test",shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
-    # subprocess.run("cargo build --release -p linux-loader",shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
-
-
-    ## 指定当前工作目录
-    # switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name +
-    #            "/scripts")
     ## 执行测试
-    subprocess.run("python3 libc_test.py " + user +" "+ branch,shell=True,cwd="warehouse/" + name + "_realm/" + "scripts")
-    # os.system("python3 libc-tests.py")
-    # switch_dir("./warehouse/" + name + "_realm/" + user + "/" + name +
-    #            "/zCore")
+    subprocess.run("python3 libc_test.py " + user + " " + branch,
+                   shell=True,
+                   cwd="warehouse/" + name + "_realm/" + "scripts")
 
-    # os.system("make clean")
     print(user, " - ", name, "libc运行结束")
-    # os.chdir(PWD)
+
 
 def run_rcore_libc(repo, branch):
     user = repo.split(":")[0]
@@ -134,14 +94,19 @@ def run_rcore_libc(repo, branch):
 
     # build
 
-    subprocess.run("git checkout " + branch,shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
-    # subprocess.run("make rootfs && make libc-test",shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
-    # subprocess.run("cargo build --release -p linux-loader",shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
+    subprocess.run("git checkout " + branch,
+                   shell=True,
+                   cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
+    # subprocess.run("make sfsimg PREBUILT=1 ARCH=x86_64",shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name + "/user")
+    # subprocess.run("make build ARCH=x86_64",shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name + "/kernel")
 
-    # run 
-    subprocess.run("python3 libc_test.py " + user +" "+ branch,shell=True,cwd="warehouse/" + name + "_realm/" + "scripts")
+    # run
+    subprocess.run("python3 libc_test.py " + user + " " + branch,
+                   shell=True,
+                   cwd="warehouse/" + name + "_realm/" + "scripts")
 
     print(user, " - ", name, "libc运行结束")
+
 
 def run_qemu(repo, branch):
     user = repo.split(":")[0]
@@ -150,16 +115,13 @@ def run_qemu(repo, branch):
     print(user, " - ", name, "qemu开始运行")
 
     # build
-
-    # subprocess.run("git checkout " + branch,shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
-    # subprocess.run("make rootfs && make libc-test",shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
-    # subprocess.run("cargo build --release -p linux-loader",shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
-
-    # run 
-    subprocess.run("python3 run_qemu.py " + user +" "+ branch,shell=True,cwd="./warehouse/" + name + "_realm/" + "scripts")
-    # subprocess.run("python3 local.py " + user +" "+ branch,shell=True,cwd="warehouse/" + name + "_realm/" + "scripts")
+    # run
+    subprocess.run("python3 run_qemu.py " + user + " " + branch,
+                   shell=True,
+                   cwd="./warehouse/" + name + "_realm/" + "scripts")
 
     print(user, " - ", name, "qemu运行结束")
+
 
 def run_k210(repo, branch):
     user = repo.split(":")[0]
@@ -168,15 +130,13 @@ def run_k210(repo, branch):
     print(user, " - ", name, "k210开始运行")
 
     # build
-
-    # subprocess.run("git checkout " + branch,shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
-    # subprocess.run("make rootfs && make libc-test",shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
-    # subprocess.run("cargo build --release -p linux-loader",shell=True,cwd="./warehouse/" + name + "_realm/" + user + "/" + name)
-
-    # run 
-    subprocess.run("python3 run_k210.py " + user +" "+ branch,shell=True,cwd="./warehouse/" + name + "_realm/" + "scripts")
+    # run
+    subprocess.run("python3 run_k210.py " + user + " " + branch,
+                   shell=True,
+                   cwd="./warehouse/" + name + "_realm/" + "scripts")
 
     print(user, " - ", name, "k210运行结束")
+
 
 def running():
     # 设置 占用
@@ -187,7 +147,6 @@ def running():
     if len(wait_for_test) != 0:
         with open("./config/test_spec.yaml", "r") as f:
             d = f.read()
-            # print(d)
             test_config = yaml.load(d, Loader=Loader)
 
         for r in wait_for_test.keys():
@@ -203,7 +162,7 @@ def running():
                     fns = None
                 # 进入 仓库 进入 分支 执行 测试
                 if fns != None:
-                    print("指定 测试 ",fns)
+                    print("指定 测试 ", fns)
                     for i in fns:
                         print(i)
                         if repo_name == "zCore":
@@ -228,9 +187,8 @@ def running():
                 else:
                     if repo_name == "zCore":
                         run_core_test(r, b)
-                    # run_libc_test(r, b)；
-                    # print(repo_name,":",b,"无指定 测试")
-                    print(repo_name,":",b,"非指定分支 不进行测试")
+                        # run_libc_test(r, b)；
+                    print(repo_name, ":", b, "非指定分支 不进行测试")
         redisManager.finish_running(r)
         print("运行 完毕 清除 redis")
 
@@ -242,14 +200,6 @@ def start_runner():
 def take_need_test_branch():
     need_test = redisManager.take_need_test()
     return need_test
-
-
-# def switch_dir(path):
-#     print("切换 工作 目录 ----->")
-#     os.chdir(PWD)
-#     print("切换前:" + str(os.system("pwd")))
-#     os.chdir(path)
-#     print("切换后:" + str(os.system("pwd")))
 
 
 if __name__ == '__main__':

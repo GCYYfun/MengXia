@@ -38,12 +38,6 @@ class Repo:
 
 class RepoManager:
 
-    # def __new__(cls, *args, **kwargs):
-    #     if not hasattr(RepoManager, "_instance"):
-    #         with RepoManager._instance_lock:
-    #             if not hasattr(RepoManager, "_instance"):
-    #                 RepoManager._instance = object.__new__(cls)
-    #     return RepoManager._instance
     repos = []
     repos_url = []
     already_exist_repo = set()
@@ -76,19 +70,3 @@ class RepoManager:
                 print(r.user, ":", r.name, " 已clone完毕")
 
         print("存在 仓库 列表 完成")
-
-        # self.repos = []
-        # with open(REPO_LIST) as f:
-        #     for line in f.readlines():
-        #         if line.startswith("#") or line.startswith("\n"):
-        #             continue
-        #         else:
-        #             self.repos.append(line.strip())
-        # self.status = dict.fromkeys(self.repos, 0)
-        # with open(ALREADY_EXIST_REPO) as f:
-        #     for r in f.readlines():
-        #         r = r.strip()
-        #         if r in self.status.keys():
-        #             print(r + " : " + str(self.status[r]))
-        #             self.status[r] = 1
-        #             print(r + " : " + str(self.status[r]))

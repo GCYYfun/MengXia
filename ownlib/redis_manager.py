@@ -27,6 +27,7 @@ class RedisManager:
     def repo_status(self, repos):
         exist_repo = []
 
+        # 想 加入 开始 可配置 存在 仓库 未完成
         # if os.path.exists(ALREADY_EXIST_REPO):
         #     with open(ALREADY_EXIST_REPO, "r") as f:
         #         d = f.read()

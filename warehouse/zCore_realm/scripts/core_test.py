@@ -24,11 +24,11 @@ TIMEOUT = 10
 
 BASE = "/home/own/MengXia"
 
-OUTPUT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/logfile/" + branch + "/zircon" + "/output.txt"
-RESULT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/result/" + branch + "/zircon" + "/test-result.txt"
-TEST_CASES_FILE  = BASE + "/warehouse/" + "zCore" + "_realm/" + "config/" + "test_case.yaml"
-ALL_CASES  = BASE + "/warehouse/" + "zCore" + "_realm/" + "config/" + "all-test-cases.txt"
-STATISTIC_BAD_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/help_info/" + branch + "/zircon" + "/test-statistic-bad.txt"
+OUTPUT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/" + user + "/logfile/" + branch + "/zircon" + "/output.txt"
+RESULT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/" + user + "/result/" + branch + "/zircon" + "/test-result.txt"
+TEST_CASES_FILE = BASE + "/warehouse/" + "zCore" + "_realm/" + "config/" + "test_case.yaml"
+ALL_CASES = BASE + "/warehouse/" + "zCore" + "_realm/" + "config/" + "all-test-cases.txt"
+STATISTIC_BAD_FILE = BASE + "/warehouse/" + "zCore" + "_realm/" + user + "/help_info/" + branch + "/zircon" + "/test-statistic-bad.txt"
 STATISTIC_GOOD_FILE = BASE + "/warehouse/" + "zCore" + "_realm/" + user + "/help_info/" + branch + "/zircon" + "/test-statistic-good.txt"
 
 PROCESSES = 1
@@ -56,50 +56,66 @@ class Tee:
     def flush(self):
         self.file.flush()
 
-def running(index_num,line,fd):
 
-    print('[running]    '+str(index_num)+'    '+line)
+def running(index_num, line, fd):
+
+    print('[running]    ' + str(index_num) + '    ' + line)
     write_arg(line)
 
     child = pexpect.spawn("qemu-system-x86_64 \
                                 -smp 1 -machine q35 \
                                 -cpu Haswell,+smap,-check,-fsgsbase \
-                                -drive if=pflash,format=raw,readonly,file="+OVMF+" \
-                                -drive format=raw,file=fat:rw:"+ ESP +" \
-                                -drive format=qcow2,file="+IMG+",id=disk,if=none \
+                                -drive if=pflash,format=raw,readonly,file=" +
+                          OVMF + " \
+                                -drive format=raw,file=fat:rw:" + ESP + " \
+                                -drive format=qcow2,file=" + IMG +
+                          ",id=disk,if=none \
                                 -device ich9-ahci,id=ahci \
                                 -device ide-drive,drive=disk,bus=ahci.0 \
                                 -serial mon:stdio -m 4G -nic none \
                                 -device isa-debug-exit,iobase=0xf4,iosize=0x04 \
                                 -accel kvm -cpu host,migratable=no,+invtsc  \
                                 -display none -nographic",
-                                timeout=TIMEOUT, encoding='utf-8')
+                          timeout=TIMEOUT,
+                          encoding='utf-8')
 
-    # with open(OUTPUT_FILE, "a") as f:
     child.logfile = fd
-    
-    index = child.expect(['PASSED','FAILED','panicked', pexpect.EOF, pexpect.TIMEOUT,'Running 0 test from 0 test case'])
-    result = ['PASSED','FAILED','PANICKED', 'EOF', 'TIMEOUT','UNKNOWN'][index]
-    print('[result]    '+str(index_num)+'    '+line+'    '+result)
+
+    index = child.expect([
+        'PASSED', 'FAILED', 'panicked', pexpect.EOF, pexpect.TIMEOUT,
+        'Running 0 test from 0 test case'
+    ])
+    result = ['PASSED', 'FAILED', 'PANICKED', 'EOF', 'TIMEOUT',
+              'UNKNOWN'][index]
+    print('[result]    ' + str(index_num) + '    ' + line + '    ' + result)
     with open(RESULT_FILE, "a") as f:
-        f.write('[result]    '+str(index_num)+'    '+line+'    '+result+'\n')
+        f.write('[result]    ' + str(index_num) + '    ' + line + '    ' +
+                result + '\n')
+
 
 def write_arg(line):
-    content=[]
-    with open(ESP + "/EFI/Boot/rboot.conf","r") as f:
+    content = []
+    with open(ESP + "/EFI/Boot/rboot.conf", "r") as f:
         content = f.readlines()
-    i=0
+    i = 0
     while i < len(content):
         if content[i].startswith("cmdline"):
-            content[i] = "cmdline=LOG=warn:userboot=test/core-standalone-test:userboot.shutdown:core-tests="+line
+            content[
+                i] = "cmdline=LOG=warn:userboot=test/core-standalone-test:userboot.shutdown:core-tests=" + line
         i = i + 1
-    with open(ESP + "/EFI/Boot/rboot.conf","w") as f:
+    with open(ESP + "/EFI/Boot/rboot.conf", "w") as f:
         f.writelines(content)
+
 
 def perpare_data(name):
     with open(ALL_CASES, "r") as f:
         lines = f.readlines()
     return lines
+
+    # 临时 ☝
+
+    # 科学 👇
+
     # with open(TEST_CASES_FILE, "r") as f:
     #     d = f.read()
     #     # print(d)
@@ -116,6 +132,7 @@ def perpare_data(name):
     #                 l.append(format(key+'.'+t))
     # return l
 
+
 def match():
     ansi_escape = re.compile(r"\x1B[@-_][0-?]*[ -/]*[@-~]")
     need_to_fix_dic = {}
@@ -125,7 +142,7 @@ def match():
     key = ""
     with open(OUTPUT_FILE, "r") as f:
         for line in f.readlines():
-            line=ansi_escape.sub('',line)
+            line = ansi_escape.sub('', line)
             if line.startswith('[ RUN      ]') and not recording:
                 recording = True
                 l = []
@@ -144,7 +161,7 @@ def match():
             elif line.startswith('[ RUN      ]') and recording:
                 need_to_fix_dic[key] = l
                 key = line[13:].split(' ')[0].strip()
-                l =[]
+                l = []
                 l.append(line)
             elif line.startswith("panicked") and recording == True:
                 recording = False
@@ -167,63 +184,70 @@ def match():
             elif recording == True:
                 l.append(line)
 
-
     with open(STATISTIC_BAD_FILE, "w") as f:
         index = 0
-        for k in need_to_fix_dic.keys() :
+        for k in need_to_fix_dic.keys():
             index += 1
             k = k.strip()
-            f.write("{0} ============================== {1} ==============================\n".format(index,k))
+            f.write(
+                "{0} ============================== {1} ==============================\n"
+                .format(index, k))
             f.writelines(need_to_fix_dic[k])
-            f.write("============================== End ==============================\n")
+            f.write(
+                "============================== End ==============================\n"
+            )
             f.write("\n\n")
 
     with open(STATISTIC_GOOD_FILE, "w") as f:
         index = 0
-        for k in passed_dic.keys() :
+        for k in passed_dic.keys():
             index += 1
-            f.write("{0} ============================== {1} ==============================\n".format(index,k))
+            f.write(
+                "{0} ============================== {1} ==============================\n"
+                .format(index, k))
             f.writelines(passed_dic[k])
-            f.write("============================== End ==============================\n")
+            f.write(
+                "============================== End ==============================\n"
+            )
             f.write("\n\n")
 
-                 
 
-# os.chdir(PWD)
-
-subprocess.run("git checkout " + branch,shell=True,cwd=BASE + "/warehouse/" + "zCore" + "_realm/" + user + "/" + "zCore")
+subprocess.run("git checkout " + branch,
+               shell=True,
+               cwd=BASE + "/warehouse/" + "zCore" + "_realm/" + user + "/" +
+               "zCore")
 lines = []
 
 lines = perpare_data("core-test")
 
-# with open(ALL_CASES_FILE, "r") as f:
-#     lines = f.readlines()
-
 with open(RESULT_FILE, "w") as f:
-    f.write('('+branch+') 测例统计:\n')
+    f.write('(' + branch + ') 测例统计:\n')
 
 with open(OUTPUT_FILE, "w") as f:
     pass
 
-subprocess.run("make build-parallel-test mode=release",shell=True,cwd=BASE+"/warehouse/" + "zCore" + "_realm/" + user + "/" + "zCore" + "/zCore")
+subprocess.run("make build-parallel-test mode=release",
+               shell=True,
+               cwd=BASE + "/warehouse/" + "zCore" + "_realm/" + user + "/" +
+               "zCore" + "/zCore")
 
 os.chdir(BASE + "/warehouse/" + "zCore" + "_realm/" + user + "/" + "zCore")
-start = time.time() 
+start = time.time()
 print("开始计时")
 
 with open(OUTPUT_FILE, "a") as f:
-    for (n,line) in enumerate(lines):
+    for (n, line) in enumerate(lines):
         if line.startswith('#') or line.startswith('\n'):
             continue
         line = line.strip()
-        running(n,line,f)
-
+        running(n, line, f)
 
 end = time.time()
 os.chdir(BASE)
-print('用时--times{:.3f}'.format(end-start))
+print('用时--times{:.3f}'.format(end - start))
 
 match()
 
-subprocess.run("python3 analysis.py " + user + " " + branch,shell=True,cwd=BASE + "/warehouse/" + "zCore" + "_realm/" + "scripts")
-# os.system('python3 statistics.py '+user + " " +branch)
+subprocess.run("python3 analysis.py " + user + " " + branch,
+               shell=True,
+               cwd=BASE + "/warehouse/" + "zCore" + "_realm/" + "scripts")
