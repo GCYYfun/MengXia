@@ -23,8 +23,7 @@ branch = sys.argv[2]
 
 TIMEOUT = 10
 
-# BASE = "/home/own/MengXia"
-BASE = "/home/own/work/MengXia"
+BASE = "/home/own/MengXia"
 
 OUTPUT_FILE = BASE + "/warehouse/" + "zCore" + "_realm/"  + user + "/logfile/" + branch + "/linux" + "/libc_output.txt"
 
